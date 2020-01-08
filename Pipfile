@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+name = "pypi"
+verify_ssl = true
+
+[requires]
+python_version = "3.7"
+
+[packages]
+cython = "==0.29.9"
+trio = "*"
+pillow = "*"
+kivy = {git = "git://github.com/kivy/kivy.git"}
+
+[dev-packages]
