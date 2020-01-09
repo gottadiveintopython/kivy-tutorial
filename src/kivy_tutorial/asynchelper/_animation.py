@@ -4,13 +4,13 @@ Usage
 =====
 
     async def some_async_func(widget):
-        await async_animation(widget, width=200, t='in_sin', d=2)
+        await animation(widget, width=200, t='in_sin', d=2)
 '''
 
-__all__ = ('async_animation', )
+__all__ = ('animation', )
 
 
-async def async_animation(target, **kwargs):
+async def animation(target, **kwargs):
     from trio import sleep, current_time as get_current_time
     from kivy.animation import AnimationTransition
     duration = kwargs.pop('d', kwargs.pop('duration', 1.))

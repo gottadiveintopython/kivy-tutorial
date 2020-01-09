@@ -1,9 +1,9 @@
-__all__ = ('async_event', )
+__all__ = ('event', )
 
 from trio import Event
 
 
-async def async_event(ed, name, *, filter=None, return_value=None, wants_kwargs=False):
+async def event(ed, name, *, filter=None, return_value=None, wants_kwargs=False):
     def _callback(*args, **kwargs):
         nonlocal parameter
         if (filter is not None) and not filter(*args, **kwargs):
