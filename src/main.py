@@ -8,8 +8,14 @@ from kivy.app import App
 SRC_DIR = Path(__file__).parent
 
 
+def _add_resource_search_path():
+    from kivy.resources import resource_add_path
+    resource_add_path(str(SRC_DIR / 'assets'))
+_add_resource_search_path()
+
+
 def _set_default_font_to_japanese():
-    LabelBase.register('yomogi', str(SRC_DIR / 'yomogifont.otf'))
+    LabelBase.register('yomogi', 'font/yomogifont.otf')
     Builder.load_string(dedent('''
     <Label,TextInput>:
         font_name: 'yomogi'
@@ -30,7 +36,7 @@ _set_default_font_size()
 
 
 def _register_icon_font():
-    LabelBase.register('Icon', str(SRC_DIR / 'materialdesignicons-webfont.ttf'))
+    LabelBase.register('Icon', 'font/materialdesignicons-webfont.ttf')
 _register_icon_font()
 
 

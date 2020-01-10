@@ -18,7 +18,8 @@ _modify_sys_path()
 
 def _register_icon_font():
     from kivy.core.text import LabelBase
-    LabelBase.register('Icon', str(SRC_DIR / 'materialdesignicons-webfont.ttf'))
+    LabelBase.register('Icon', str(SRC_DIR.joinpath(
+        'assets', 'font', 'materialdesignicons-webfont.ttf')))
 _register_icon_font()
 
 
