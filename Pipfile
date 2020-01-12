@@ -13,3 +13,4 @@ pillow = "*"
 kivy = {git = "git://github.com/kivy/kivy.git"}
 
 [dev-packages]
+pytest-trio = "*"
