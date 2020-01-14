@@ -11,6 +11,7 @@ cython = "==0.29.9"
 trio = "*"
 pillow = "*"
 kivy = {git = "git://github.com/kivy/kivy.git"}
+asynckivy = {git = "https://github.com/gottadiveintopython/asynckivy"}
 
 [dev-packages]
 pytest-trio = "*"

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4ee65b5716b10fe71685950e6bdeec02f3acafe0f2315772d3d0b417814b1eb1"
+            "sha256": "0fa573d89efad8350597531bcb57b20117c22e13ea66bcc424fdc6a76a8e6faf"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,6 +22,9 @@
                 "sha256:6ebb3d106c12920aaae42ccb6f787ef5eefdcdd166ea3d628fa8476abe712144"
             ],
             "version": "==1.10"
+        },
+        "asynckivy": {
+            "git": "https://github.com/gottadiveintopython/asynckivy"
         },
         "attrs": {
             "hashes": [
