@@ -9,8 +9,10 @@ Usage
 
 __all__ = ('animation', )
 
+import trio
 
-async def animation(target, **kwargs):
+
+async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
     from trio import sleep, current_time as get_current_time
     from kivy.animation import AnimationTransition
     duration = kwargs.pop('d', kwargs.pop('duration', 1.))
@@ -30,6 +32,8 @@ async def animation(target, **kwargs):
         elif isinstance(original_value, dict):
             original_value = original_value.copy()
         properties[key] = (original_value, value)
+
+    task_status.started()
 
     if not duration:
         await sleep(0)
