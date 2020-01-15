@@ -41,14 +41,18 @@ _register_icon_font()
 
 
 class TutorialApp(App):
-    nursery = None
-
     def build(self):
-        from kivy_tutorial import KTMain
-        return KTMain()
+        from kivy.uix.floatlayout import FloatLayout
+        return FloatLayout()
 
     def on_start(self):
-        self.nursery.start_soon(self.root.start)
+        from functools import partial
+        import kivy_tutorial
+        self.nursery.start_soon(partial(
+            kivy_tutorial.main,
+            nursery=self.nursery,
+            parent=self.root,
+        ))
 
     async def root_task(self):
         async with trio.open_nursery() as nursery:

@@ -1,1 +1,1 @@
-from .main import KTMain
+from ._main import main
