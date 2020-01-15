@@ -1,4 +1,4 @@
-__all__ = ('KTIcon', 'KTButton', 'KTIconButton', )
+__all__ = ('KTIcon', 'KTButton', 'KTIconButton', 'KTTightLabel', )
 
 from kivy.properties import StringProperty, ColorProperty, NumericProperty
 from kivy.lang import Builder
@@ -11,6 +11,10 @@ from kivy_tutorial.triouser import TrioUser
 
 KV_CODE = '''
 #:import md_icons kivymd.icon_definitions.md_icons
+
+<KTTightLabel@Label>:
+    size_hint: None, None
+    size: self.texture_size
 
 <KTIcon>:
     font_name: 'Icon'
@@ -66,6 +70,9 @@ KV_CODE = '''
         PopMatrix:
 '''
 Builder.load_string(KV_CODE)
+
+
+KTTightLabel = Factory.KTTightLabel
 
 
 class KTIcon(Factory.Label):

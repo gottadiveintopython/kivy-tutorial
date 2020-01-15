@@ -15,6 +15,8 @@ BoxLayout:
             icon: 'arrow-right'
         KTIconButton:
             icon: 'twitter'
+        KTTightLabel:
+            text: 'KTTightLabel'
         KTIconButton:
             icon: 'twitch'
         KTIconButton:
