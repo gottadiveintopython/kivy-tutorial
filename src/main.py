@@ -1,6 +1,9 @@
 from textwrap import dedent
 from pathlib import Path
 import trio
+from kivy.config import Config
+Config.set('graphics', 'width', 1280)
+Config.set('graphics', 'height', 720)
 from kivy.core.text import LabelBase
 from kivy.lang import Builder
 from kivy.app import App
