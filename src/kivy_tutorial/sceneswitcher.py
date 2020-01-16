@@ -1,9 +1,11 @@
 __all__ = ('SceneSwitcher', )
 
+from kivy_tutorial.triouser import TrioUser
 
-class SceneSwitcher:
-    def __init__(self, *, nursery, pkgname:str, userdata:dict=None):
-        self.nursery = nursery
+
+class SceneSwitcher(TrioUser):
+    def __init__(self, *, pkgname:str, userdata:dict=None, **kwargs):
+        super().__init__(**kwargs)
         self.pkgname = pkgname
         self.modules = {}
         self.userdata = {} if userdata is None else userdata
