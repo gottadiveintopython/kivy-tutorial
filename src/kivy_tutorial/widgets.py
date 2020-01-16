@@ -1,4 +1,4 @@
-__all__ = ('KTIcon', 'KTButton', 'KTIconButton', 'KTTightLabel', )
+__all__ = ('KTIcon', 'KTButton', 'KTIconButton', 'KTTightLabel', 'KTTightButton', )
 
 from kivy.properties import StringProperty, ColorProperty, NumericProperty
 from kivy.lang import Builder
@@ -43,6 +43,11 @@ KV_CODE = '''
             size: self.width - dp(8), self.height - dp(8)
         PopMatrix:
 
+<KTTightButton@KTButton>:
+    size_hint: None, None
+    width: self.texture_size[0] + dp(10)
+    height: self.texture_size[1] + dp(10)
+
 <KTIconButton>:
     font_name: 'Icon'
     text: md_icons.get(self.icon, '')
@@ -70,9 +75,6 @@ KV_CODE = '''
         PopMatrix:
 '''
 Builder.load_string(KV_CODE)
-
-
-KTTightLabel = Factory.KTTightLabel
 
 
 class KTIcon(Factory.Label):
@@ -155,3 +157,7 @@ class KTButton(TrioUser, Factory.Label):
 
 class KTIconButton(KTButton):
     icon = StringProperty()
+
+
+KTTightLabel = Factory.KTTightLabel
+KTTightButton = Factory.KTTightButton

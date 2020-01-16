@@ -35,11 +35,11 @@ BoxLayout:
         text: "Beautiful is better than ugly."
     KTButton:
         text: "Explicit is better than implicit."
-    KTButton:
+    KTTightButton:
         text: "Simple is better than complex."
-    KTButton:
+    KTTightButton:
         text: "Complex is better than complicated."
-    KTButton:
+    KTTightButton:
         text: "Flat is better than nested."
 '''
 
