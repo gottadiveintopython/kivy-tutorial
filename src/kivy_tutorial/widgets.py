@@ -14,7 +14,8 @@ KV_CODE = '''
 
 <KTTightLabel@Label>:
     size_hint: None, None
-    size: self.texture_size
+    width: self.texture_size[0] + dp(10)
+    height: self.texture_size[1] + dp(10)
 
 <KTIcon>:
     font_name: 'Icon'
