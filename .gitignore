@@ -4,3 +4,4 @@ bin/
 *.pyo
 .venv/
 .pytest_cache/
+*.mp3
