@@ -12,6 +12,7 @@ trio = "*"
 pillow = "*"
 kivy = {git = "git://github.com/kivy/kivy.git"}
 asynckivy = {git = "https://github.com/gottadiveintopython/asynckivy"}
+numpy = "*"
 
 [dev-packages]
 pytest-trio = "*"
