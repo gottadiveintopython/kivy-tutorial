@@ -2,16 +2,13 @@ __all__ = ('main', )
 
 
 KV_CODE = '''
-FloatLayout:
+RelativeLayout:
     FloatLayout
         id: bottom_layer
-        pos_hint: {'x': 0, 'y': 0, }
     FloatLayout
         id: middle_layer
-        pos_hint: {'x': 0, 'y': 0, }
     FloatLayout
         id: top_layer
-        pos_hint: {'x': 0, 'y': 0, }
 '''
 
 
