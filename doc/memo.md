@@ -2,7 +2,7 @@
 
 以下のようなcodeにおいて
 
-```python3
+```python
 async def main(some_widget):
     from kivy_tutorial.asynchelper import event
     await event(some_widget, 'on_touch_down')
@@ -12,3 +12,24 @@ async def main(some_widget):
 ```
 
 userが素早くclickした場合、A行が実行される時点で既に`on_touch_up`が発生済みになる事があるので`asynchelper.event`は使い物にならない。ただ代わりに`asynckivy`を使うことで解決できる。
+
+# kivy.core.audio.Soundはplay()の直後にseek()できない?
+
+使うaudio provider次第かもしれないが`play()`の直後に`seek()`しても指定した位置からは再生できない。
+
+```python
+from kivy.core.audio import SoundLoader
+sound = SoundLoader.load(...)
+sound.play()
+sound.seek(3)  # <- 失敗する
+```
+
+ただ少し時間を置くとうまくいく
+
+```python
+from kivy.clock import Clock
+from kivy.core.audio import SoundLoader
+sound = SoundLoader.load(...)
+sound.play()
+Clock.schedule_once(lambda __: sound.seek(3), 0.1)
+```
