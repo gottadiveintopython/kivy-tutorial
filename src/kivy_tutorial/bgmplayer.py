@@ -38,7 +38,7 @@ class Bgm:
         sound.volume = 0
         sound.play()
         await trio.sleep(.1)  # play()のあと直ちにseek()はできないのでsleep()を挟む
-        sound.seek(self._pos + .1)
+        sound.seek(self._pos)
         await animation(sound, volume=.5)
 
 
