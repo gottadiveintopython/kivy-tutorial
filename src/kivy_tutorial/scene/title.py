@@ -18,7 +18,7 @@ async def main(switcher, nursery, *, parent, bgmplayer, **kwargs):
                 pos_hint={'center_x': .5, },
             )
             root.add_widget(title_label)
-            await trio.sleep(0.01)
+            await trio.sleep(0.1)
             title_label.y = root.height
             await or_(
                 animation(
