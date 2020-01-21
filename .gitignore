@@ -5,3 +5,4 @@ bin/
 .venv/
 .pytest_cache/
 *.mp3
+/temp
