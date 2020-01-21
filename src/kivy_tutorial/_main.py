@@ -19,6 +19,7 @@ async def main(*, nursery, parent):
     from kivy_tutorial.triouser import activate_nursery
     from kivy_tutorial.sceneswitcher import SceneSwitcher
     from kivy_tutorial.bgmplayer import BgmPlayer
+    from kivy_tutorial.soundplayer import SoundPlayer
     from kivy_tutorial import background_animation
 
     with activate_nursery(nursery):
@@ -29,6 +30,7 @@ async def main(*, nursery, parent):
             userdata={
                 'parent': root.ids.middle_layer,
                 'bgmplayer': BgmPlayer(file_prefix='sound/'),
+                'soundplayer': SoundPlayer(file_prefix='sound/'),
             },
         )
         nursery.start_soon(partial(
