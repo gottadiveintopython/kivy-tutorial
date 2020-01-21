@@ -1,4 +1,4 @@
-async def main(switcher, nursery, *, parent, bgmplayer, **kwargs):
+async def main(switcher, nursery, *, parent, bgmplayer, soundplayer, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
@@ -43,6 +43,7 @@ async def main(switcher, nursery, *, parent, bgmplayer, **kwargs):
                 opacity=0,
                 font_size='70sp',
                 pos_hint={'center_x': .5, 'center_y': .25, },
+                on_press=lambda __: soundplayer.play('button.ogg'),
             )
             root.add_widget(start_button)
             await trio.sleep(0.01)
