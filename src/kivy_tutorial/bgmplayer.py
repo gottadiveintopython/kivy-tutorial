@@ -44,12 +44,12 @@ class Bgm:
 
 class BgmPlayer(TrioUser):
 
-    def __init__(self, *, polling_interval=2, **kwargs):
+    def __init__(self, *, file_prefix, polling_interval=2, **kwargs):
         super().__init__(**kwargs)
         self._next_file = None
         self._bgms = {}
         self._current_bgm = None
-        self.nursery.start_soon(self._keep_polling, polling_interval)
+        self.nursery.start_soon(self._keep_polling, polling_interval, file_prefix)
 
     def stop(self):
         self._next_file = ''
@@ -57,7 +57,7 @@ class BgmPlayer(TrioUser):
     def play(self, next_file):
         self._next_file = next_file
 
-    async def _keep_polling(self, polling_interval):
+    async def _keep_polling(self, polling_interval, file_prefix):
         from kivy.core.audio import SoundLoader
         bgms = self._bgms
         while True:
@@ -75,7 +75,7 @@ class BgmPlayer(TrioUser):
                 self._next_file = None
                 next_bgm = bgms.get(next_file, None)
                 if next_bgm is None:
-                    next_bgm = Bgm(SoundLoader.load(f"sound/{next_file}"))
+                    next_bgm = Bgm(SoundLoader.load(f"{file_prefix}{next_file}"))
                     bgms[next_file] = next_bgm
                 if current_bgm is not None and next_bgm is not current_bgm:
                     await current_bgm.stop()

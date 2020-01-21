@@ -28,7 +28,7 @@ async def main(*, nursery, parent):
             pkgname='kivy_tutorial.scene',
             userdata={
                 'parent': root.ids.middle_layer,
-                'bgmplayer': BgmPlayer(),
+                'bgmplayer': BgmPlayer(file_prefix='sound/'),
             },
         )
         nursery.start_soon(partial(

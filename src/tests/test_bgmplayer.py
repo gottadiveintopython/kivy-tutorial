@@ -34,7 +34,11 @@ async def test_play_then_stop(nursery):
     import trio
     from kivy_tutorial.bgmplayer import BgmPlayer
     
-    player = BgmPlayer(nursery=nursery, polling_interval=.1)
+    player = BgmPlayer(
+        nursery=nursery,
+        polling_interval=.1,
+        file_prefix='sound/'
+    )
     bgms = player._bgms
     player.play('n75.ogg')
     assert player._next_file == 'n75.ogg'
@@ -54,7 +58,11 @@ async def test_play_then_play(nursery):
     import trio
     from kivy_tutorial.bgmplayer import BgmPlayer
     
-    player = BgmPlayer(nursery=nursery, polling_interval=.1)
+    player = BgmPlayer(
+        nursery=nursery,
+        polling_interval=.1,
+        file_prefix='sound/'
+    )
     bgms = player._bgms
     player.play('n75.ogg')
     assert player._next_file == 'n75.ogg'
