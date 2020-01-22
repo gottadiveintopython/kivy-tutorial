@@ -16,3 +16,5 @@ icon_font_size = max(sp(20), 40)
 icon_width = max(sp(30), 60)
 icon_height = max(sp(30), 60)
 icon_size = (icon_width, icon_height, )
+
+slidemenu_background_color = rgba("#111111")

@@ -20,6 +20,7 @@ async def main(*, nursery, parent):
     from kivy_tutorial.appstate import AppState
     from kivy_tutorial.bgmplayer import BgmPlayer
     from kivy_tutorial import background_animation
+    from kivy_tutorial.slidemenu import KTSlideMenu
 
     with activate_nursery(nursery):
         appstate = AppState()
@@ -29,6 +30,11 @@ async def main(*, nursery, parent):
         appstate.bind(
             bgm=partial(_change_bgm, bgmplayer=bgmplayer),
             mute_bgm=partial(_mute_or_unmute_bgm, bgmplayer=bgmplayer),
+            hide_slidemenu=partial(
+                _hide_or_unhide_slidemenu,
+                slidemenu=KTSlideMenu(appstate=appstate),
+                parent=root.ids.top_layer
+            ),
         )
         switcher = SceneSwitcher(
             pkgname='kivy_tutorial.scene',
@@ -58,3 +64,10 @@ def _mute_or_unmute_bgm(appstate, mute, *, bgmplayer):
         bgmplayer.stop()
     else:
         bgmplayer.play(appstate.bgm)
+
+
+def _hide_or_unhide_slidemenu(appstate, hide, *, slidemenu, parent):
+    if hide:
+        slidemenu.detach()
+    else:
+        slidemenu.attach(parent)
