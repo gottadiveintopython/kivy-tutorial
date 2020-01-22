@@ -18,15 +18,9 @@ def _add_resource_search_path():
 _add_resource_search_path()
 
 
-def _set_default_font_to_japanese():
+def _register_japanese_font():
     LabelBase.register('yomogi', 'font/yomogifont.otf')
-    Builder.load_string(dedent('''
-    <Label,TextInput>:
-        font_name: 'yomogi'
-    <Popup>:
-        title_font: 'yomogi'
-    '''))
-_set_default_font_to_japanese()
+_register_japanese_font()
 
 
 def _register_icon_font():
