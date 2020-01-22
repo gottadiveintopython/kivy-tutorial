@@ -5,7 +5,6 @@ from kivy.config import Config
 Config.set('graphics', 'width', 1280)
 Config.set('graphics', 'height', 720)
 Config.set('graphics', 'maxfps', 60)
-from kivy.core.text import LabelBase
 from kivy.lang import Builder
 from kivy.app import App
 
@@ -18,14 +17,11 @@ def _add_resource_search_path():
 _add_resource_search_path()
 
 
-def _register_japanese_font():
-    LabelBase.register('yomogi', 'font/yomogifont.otf')
-_register_japanese_font()
-
-
-def _register_icon_font():
+def _register_fonts():
+    from kivy.core.text import LabelBase
     LabelBase.register('Icon', 'font/materialdesignicons-webfont.ttf')
-_register_icon_font()
+    LabelBase.register('yomogi', 'font/yomogifont.otf')
+_register_fonts()
 
 
 class TutorialApp(App):
