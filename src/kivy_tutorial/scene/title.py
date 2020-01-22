@@ -1,4 +1,4 @@
-async def main(switcher, nursery, *, parent, bgmplayer, **kwargs):
+async def main(switcher, nursery, *, parent, appstate, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
@@ -6,7 +6,7 @@ async def main(switcher, nursery, *, parent, bgmplayer, **kwargs):
     from kivy_tutorial.widgets import KTTightLabel, KTTightButton
 
     try:
-        bgmplayer.play('n75.ogg')
+        appstate.bgm = 'n75.ogg'
         root = Factory.RelativeLayout()
         parent.add_widget(root)
 
