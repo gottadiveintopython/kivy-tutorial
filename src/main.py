@@ -29,16 +29,6 @@ def _set_default_font_to_japanese():
 _set_default_font_to_japanese()
 
 
-def _set_default_font_size():
-    Builder.load_string(dedent('''
-    <Label,TextInput>:
-        font_size: max(sp(15), 30)
-    <Popup>:
-        title_size: max(sp(15), 30)
-    '''))
-_set_default_font_size()
-
-
 def _register_icon_font():
     LabelBase.register('Icon', 'font/materialdesignicons-webfont.ttf')
 _register_icon_font()
