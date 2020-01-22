@@ -1,4 +1,7 @@
-__all__ = ('KTIcon', 'KTButton', 'KTIconButton', 'KTTightLabel', 'KTTightButton', )
+__all__ = (
+    'KTLabel', 'KTTightLabel', 'KTButton', 'KTTightButton',
+    'KTIcon', 'KTIconButton',
+)
 
 from kivy.properties import StringProperty, ColorProperty, NumericProperty
 from kivy.lang import Builder
@@ -15,9 +18,11 @@ KV_CODE = '''
 #:import md_icons kivymd.icon_definitions.md_icons
 #:import theme kivy_tutorial.theme
 
-<KTTightLabel@Label>:
+<KTLabel@Label>:
     font_size: theme.label_font_size
     font_name: theme.font_name
+
+<KTTightLabel@KTLabel>:
     size_hint: None, None
     width: self.texture_size[0] + dp(10)
     height: self.texture_size[1] + dp(10)
@@ -169,5 +174,6 @@ class KTIconButton(KTButton):
     icon = StringProperty()
 
 
+KTLabel = Factory.KTLabel
 KTTightLabel = Factory.KTTightLabel
 KTTightButton = Factory.KTTightButton

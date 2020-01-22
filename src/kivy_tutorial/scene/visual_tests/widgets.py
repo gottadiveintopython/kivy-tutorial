@@ -5,7 +5,7 @@ BoxLayout:
     orientation: 'vertical'
     spacing: 10
     padding: 10
-    Label:
+    KTLabel:
         text: 'widgetの見た目のtest'
         size_hint_y: None
         height: self.texture_size[1]
