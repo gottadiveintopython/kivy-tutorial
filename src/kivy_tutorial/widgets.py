@@ -7,6 +7,7 @@ from kivy.factory import Factory
 import trio
 
 from kivy_tutorial.triouser import TrioUser
+from kivy_tutorial.soundplayer import global_instance as soundplayer
 
 
 KV_CODE = '''
@@ -87,6 +88,7 @@ class KTButton(TrioUser, Factory.Label):
     border_color = ColorProperty('#444444')
     border_color2 = ColorProperty('#AAAAAA')
     background_color = ColorProperty('#999933')
+    sound = StringProperty('button.ogg')
     _border_color = ColorProperty(border_color.defaultvalue)
     _scaling = NumericProperty(1)
 
@@ -95,7 +97,8 @@ class KTButton(TrioUser, Factory.Label):
         self.nursery.start_soon(self._trio_main)
 
     def on_press(self):
-        pass
+        if self.sound:
+            soundplayer.play(self.sound)
 
     def on_release(self):
         pass

@@ -1,4 +1,4 @@
-__all__ = ('SoundPlayer', )
+__all__ = ('SoundPlayer', 'global_instance', )
 
 
 class SoundPlayer:
@@ -17,3 +17,6 @@ class SoundPlayer:
         elif sound.state == 'play':
             sound.stop()
         sound.play()
+
+
+global_instance = SoundPlayer(file_prefix='sound/')
