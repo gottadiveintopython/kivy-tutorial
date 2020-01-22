@@ -8,25 +8,32 @@ import trio
 
 from kivy_tutorial.triouser import TrioUser
 from kivy_tutorial.soundplayer import global_instance as soundplayer
+from kivy_tutorial import theme
 
 
 KV_CODE = '''
 #:import md_icons kivymd.icon_definitions.md_icons
+#:import theme kivy_tutorial.theme
 
 <KTTightLabel@Label>:
+    font_size: theme.label_font_size
+    font_name: theme.font_name
     size_hint: None, None
     width: self.texture_size[0] + dp(10)
     height: self.texture_size[1] + dp(10)
 
 <KTIcon>:
+    font_size: theme.label_font_size
     font_name: 'Icon'
+    size: theme.icon_size
     text: md_icons.get(self.icon, '')
 
 <KTButton>:
-    outline_width: 2
-    outline_color: 1, 1, 1, 1
-    color: 0, 0, 0, 1
-    font_size: max(sp(15), 30)
+    outline_width: theme.button_outline_width
+    outline_color: theme.button_outline_color
+    color: theme.button_color
+    font_size: theme.button_font_size
+    font_name: theme.font_name
     canvas.before:
         PushMatrix:
         Scale:
@@ -53,10 +60,9 @@ KV_CODE = '''
 <KTIconButton>:
     font_name: 'Icon'
     text: md_icons.get(self.icon, '')
-    font_size: max(sp(20), 40)
+    font_size: theme.icon_font_size
     size_hint: None, None
-    width: max(sp(30), 60)
-    height: max(sp(30), 60)
+    size: theme.icon_size
     canvas.before:
         Clear:
         PushMatrix:
@@ -85,9 +91,9 @@ class KTIcon(Factory.Label):
 
 class KTButton(TrioUser, Factory.Label):
     __events__ = ('on_press', 'on_release', )
-    border_color = ColorProperty('#444444')
-    border_color2 = ColorProperty('#AAAAAA')
-    background_color = ColorProperty('#999933')
+    border_color = ColorProperty(theme.button_border_color)
+    border_color2 = ColorProperty(theme.button_border_color2)
+    background_color = ColorProperty(theme.button_background_color)
     sound = StringProperty('button.ogg')
     _border_color = ColorProperty(border_color.defaultvalue)
     _scaling = NumericProperty(1)
