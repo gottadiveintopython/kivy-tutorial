@@ -1,4 +1,4 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.slidemenu
+# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.drawer
 from kivy.lang import Builder
 
 
@@ -11,10 +11,10 @@ RelativeLayout:
         spacing: 10
         orientation: 'lr-bt'
         KTTightButton:
-            text: 'show menu'
+            text: 'show drawer'
             id: show
         KTTightButton:
-            text: 'hide menu'
+            text: 'hide drawer'
             id: hide
 '''
 
@@ -26,8 +26,8 @@ async def main(switcher, nursery, *, appstate, parent, **kwargs):
         with activate_nursery(nursery):
             root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
-        root.ids.show.bind(on_release=lambda __: setattr(appstate, 'hide_slidemenu', False))
-        root.ids.hide.bind(on_release=lambda __: setattr(appstate, 'hide_slidemenu', True))
+        root.ids.show.bind(on_release=lambda __: setattr(appstate, 'hide_drawer', False))
+        root.ids.hide.bind(on_release=lambda __: setattr(appstate, 'hide_drawer', True))
         await trio.sleep_forever()
     finally:
         parent.remove_widget(root)

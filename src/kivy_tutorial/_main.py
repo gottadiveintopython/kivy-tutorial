@@ -20,7 +20,7 @@ async def main(*, nursery, parent):
     from kivy_tutorial.appstate import AppState
     from kivy_tutorial.bgmplayer import BgmPlayer
     from kivy_tutorial import background_animation
-    from kivy_tutorial.slidemenu import KTSlideMenu
+    from kivy_tutorial.drawer import KTDrawer
 
     with activate_nursery(nursery):
         appstate = AppState()
@@ -30,9 +30,9 @@ async def main(*, nursery, parent):
         appstate.bind(
             bgm=partial(_change_bgm, bgmplayer=bgmplayer),
             mute_bgm=partial(_mute_or_unmute_bgm, bgmplayer=bgmplayer),
-            hide_slidemenu=partial(
-                _hide_or_unhide_slidemenu,
-                slidemenu=KTSlideMenu(appstate=appstate),
+            hide_drawer=partial(
+                _hide_or_unhide_drawer,
+                drawer=KTDrawer(appstate=appstate),
                 parent=root.ids.top_layer
             ),
         )
@@ -66,8 +66,8 @@ def _mute_or_unmute_bgm(appstate, mute, *, bgmplayer):
         bgmplayer.play(appstate.bgm)
 
 
-def _hide_or_unhide_slidemenu(appstate, hide, *, slidemenu, parent):
+def _hide_or_unhide_drawer(appstate, hide, *, drawer, parent):
     if hide:
-        slidemenu.detach()
+        drawer.detach()
     else:
-        slidemenu.attach(parent)
+        drawer.attach(parent)

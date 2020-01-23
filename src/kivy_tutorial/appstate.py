@@ -9,8 +9,8 @@ class AppState(EventDispatcher):
 
     bgm = StringProperty('')
     mute_bgm = BooleanProperty(False)
-    hide_slidemenu = BooleanProperty(True)
+    hide_drawer = BooleanProperty(True)
 
     def on_exit(self):
-        '''利用者がslide menuの'出口'iconを押した時に起きるevent'''
+        '''利用者が引き出しの'出口'buttonを押した時に起きるevent'''
         pass

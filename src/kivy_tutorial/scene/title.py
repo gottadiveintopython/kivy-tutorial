@@ -7,7 +7,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
 
     try:
         appstate.bgm = 'n75.ogg'
-        appstate.hide_slidemenu = True
+        appstate.hide_drawer = True
         root = Factory.RelativeLayout()
         parent.add_widget(root)
 

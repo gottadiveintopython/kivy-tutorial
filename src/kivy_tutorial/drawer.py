@@ -9,11 +9,11 @@ from kivy_tutorial.widgets import KTIcon
 KV_CODE = '''
 #:import theme kivy_tutorial.theme
 
-<KTSlideMenuTab>:
+<KTDrawerTab>:
     icon: 'menu-left'
     canvas.before:
         Color:
-            rgba: theme.slidemenu_background_color
+            rgba: theme.drawer_background_color
         Rectangle:
             pos: self.pos
             size: self.size
@@ -23,14 +23,14 @@ KV_CODE = '''
             angle: self.icon_angle
     canvas.after:
         PopMatrix:
-<KTSlideMenu>:
+<KTDrawer>:
     size_hint: None, None
     size: self.minimum_size
     FloatLayout:
         size_hint: None, None
         width: tab.width
         height: grid.height
-        KTSlideMenuTab:
+        KTDrawerTab:
             id: tab
             size_hint: None, 0.3
             width: self.texture_size[0]
@@ -44,7 +44,7 @@ KV_CODE = '''
         rows: 3
         canvas.before:
             Color:
-                rgba: theme.slidemenu_background_color
+                rgba: theme.drawer_background_color
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -60,11 +60,11 @@ KV_CODE = '''
 Builder.load_string(KV_CODE)
 
 
-class KTSlideMenuTab(ButtonBehavior, KTIcon):
+class KTDrawerTab(ButtonBehavior, KTIcon):
     icon_angle = NumericProperty(0)
 
 
-class KTSlideMenu(TrioUser, BoxLayout):
+class KTDrawer(TrioUser, BoxLayout):
     appstate = ObjectProperty()
     _local_nursery = None
 
@@ -89,17 +89,17 @@ class KTSlideMenu(TrioUser, BoxLayout):
         try:
             tab = self.ids.tab
             self.pos_hint = {'center_y': .5, }
-            def place_menu_to_unseen_position(parent, width):
+            def place_drawer_to_unseen_position(parent, width):
                 self.x = parent.width - tab.width
-            place_menu_to_unseen_position(parent, parent.width)
+            place_drawer_to_unseen_position(parent, parent.width)
             tab.icon_angle = 0.
             parent.add_widget(self)
-            parent.bind(width=place_menu_to_unseen_position)
+            parent.bind(width=place_drawer_to_unseen_position)
             await trio.sleep(.1)
             while True:
                 await event(tab, 'on_press')
                 soundplayer.play('button.ogg')
-                parent.unbind(width=place_menu_to_unseen_position)
+                parent.unbind(width=place_drawer_to_unseen_position)
                 async with trio.open_nursery() as nursery:
                     nursery.start_soon(partial(
                         animation, self,
@@ -126,10 +126,10 @@ class KTSlideMenu(TrioUser, BoxLayout):
                         icon_angle=0.,
                         d=.3
                     ))
-                parent.bind(width=place_menu_to_unseen_position)
+                parent.bind(width=place_drawer_to_unseen_position)
         finally:
             parent.remove_widget(self)
-            parent.unbind(width=place_menu_to_unseen_position)
+            parent.unbind(width=place_drawer_to_unseen_position)
 
     def detach(self):
         if self._local_nursery is not None:
