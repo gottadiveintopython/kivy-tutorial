@@ -24,6 +24,7 @@ async def main(*, nursery, parent):
 
     with activate_nursery(nursery):
         appstate = AppState()
+        drawer = KTDrawer(appstate=appstate)
         bgmplayer = BgmPlayer(file_prefix='sound/')
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
@@ -32,7 +33,7 @@ async def main(*, nursery, parent):
             mute_bgm=partial(_mute_or_unmute_bgm, bgmplayer=bgmplayer),
             hide_drawer=partial(
                 _hide_or_unhide_drawer,
-                drawer=KTDrawer(appstate=appstate),
+                drawer=drawer,
                 parent=root.ids.top_layer
             ),
         )
@@ -41,6 +42,7 @@ async def main(*, nursery, parent):
             userdata={
                 'parent': root.ids.middle_layer,
                 'appstate': appstate,
+                'drawer': drawer,
             },
         )
         nursery.start_soon(partial(
