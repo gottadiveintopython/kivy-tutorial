@@ -1,5 +1,5 @@
 __all__ = (
-    'KTLabel', 'KTTightLabel', 'KTButton', 'KTTightButton',
+    'KTLabel', 'KTTightLabel', 'KTButton', 'KTTightButton', 'KTLabelButton',
     'KTIcon', 'KTIconButton',
 )
 
@@ -26,6 +26,11 @@ KV_CODE = '''
     size_hint: None, None
     width: self.texture_size[0] + dp(10)
     height: self.texture_size[1] + dp(10)
+
+<KTLabelButton@ButtonBehavior+KTTightLabel>:
+    outline_width: theme.button_outline_width
+    outline_color: theme.button_background_color
+    color: theme.button_color
 
 <KTIcon>:
     font_size: theme.label_font_size
@@ -176,4 +181,5 @@ class KTIconButton(KTButton):
 
 KTLabel = Factory.KTLabel
 KTTightLabel = Factory.KTTightLabel
+KTLabelButton = Factory.KTLabelButton
 KTTightButton = Factory.KTTightButton

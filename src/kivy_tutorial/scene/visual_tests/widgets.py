@@ -1,6 +1,8 @@
 # export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets
 
 KV_CODE = '''
+#:import webbrowser webbrowser
+
 BoxLayout:
     orientation: 'vertical'
     spacing: 10
@@ -41,6 +43,9 @@ BoxLayout:
         text: "Complex is better than complicated."
     KTTightButton:
         text: "Flat is better than nested."
+    KTLabelButton:
+        text: "open web browser"
+        on_release: webbrowser.open('https://www.google.com/')
 '''
 
 
