@@ -29,25 +29,28 @@ KV_CODE = '''
     FloatLayout:
         size_hint: None, None
         width: tab.width
-        height: grid.height
+        height: box.height
         KTDrawerTab:
             id: tab
             size_hint: None, 0.3
             width: self.texture_size[0]
             pos_hint: {'x': 0, 'center_y': .5, }
-    GridLayout:
-        id: grid
+    BoxLayout:
+        id: box
+        orientation: 'vertical'
         size_hint: None, None
         size: self.minimum_size
         padding: 10
         spacing: 10
-        rows: 3
         canvas.before:
             Color:
                 rgba: theme.drawer_background_color
             Rectangle:
                 pos: self.pos
                 size: self.size
+        KTIconButton:
+            icon: 'home'
+            on_release: root.dispatch('on_go_home')
         KTIconButton:
             icon: 'volume-off' if root.appstate.mute_bgm else 'volume-high'
             outline_width: 0 if root.appstate.mute_bgm else theme.button_outline_width
@@ -65,7 +68,7 @@ class KTDrawerTab(ButtonBehavior, KTIcon):
 
 
 class KTDrawer(TrioUser, BoxLayout):
-    __events__ = ('on_go_back', )
+    __events__ = ('on_go_back', 'on_go_home', )
     appstate = ObjectProperty()
     _local_nursery = None
 
@@ -139,4 +142,8 @@ class KTDrawer(TrioUser, BoxLayout):
 
     def on_go_back(self):
         '''利用者が引き出しの'戻る'buttonを押した時に起きるevent'''
+        pass
+
+    def on_go_home(self):
+        '''利用者が引き出しの'家'buttonを押した時に起きるevent'''
         pass

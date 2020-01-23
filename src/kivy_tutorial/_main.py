@@ -45,6 +45,7 @@ async def main(*, nursery, parent):
                 'drawer': drawer,
             },
         )
+        drawer.bind(on_go_home=lambda __: switcher.switch('title'))
         nursery.start_soon(partial(
             background_animation.play,
             nursery=nursery,
