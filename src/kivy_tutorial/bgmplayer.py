@@ -44,7 +44,7 @@ class Bgm:
 
 class BgmPlayer(TrioUser):
 
-    def __init__(self, *, file_prefix, polling_interval=2, **kwargs):
+    def __init__(self, *, file_prefix, polling_interval=1, **kwargs):
         super().__init__(**kwargs)
         self._next_file = None
         self._bgms = {}
