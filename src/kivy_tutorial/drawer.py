@@ -54,8 +54,8 @@ KV_CODE = '''
             color: (0, 0, 0, .3, ) if root.appstate.mute_bgm else theme.button_color
             on_release: root.appstate.mute_bgm = not root.appstate.mute_bgm
         KTIconButton:
-            icon: 'exit-run'
-            on_release: root.dispatch('on_exit')
+            icon: 'arrow-left-bold'
+            on_release: root.dispatch('on_go_back')
 '''
 Builder.load_string(KV_CODE)
 
@@ -65,7 +65,7 @@ class KTDrawerTab(ButtonBehavior, KTIcon):
 
 
 class KTDrawer(TrioUser, BoxLayout):
-    __events__ = ('on_exit', )
+    __events__ = ('on_go_back', )
     appstate = ObjectProperty()
     _local_nursery = None
 
@@ -137,6 +137,6 @@ class KTDrawer(TrioUser, BoxLayout):
             self._local_nursery.cancel_scope.cancel()
             self._local_nursery = None
 
-    def on_exit(self):
-        '''利用者が引き出しの'出口'buttonを押した時に起きるevent'''
+    def on_go_back(self):
+        '''利用者が引き出しの'戻る'buttonを押した時に起きるevent'''
         pass
