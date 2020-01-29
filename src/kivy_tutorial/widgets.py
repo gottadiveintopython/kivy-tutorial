@@ -5,7 +5,7 @@ __all__ = (
 
 from kivy.properties import StringProperty, ColorProperty, NumericProperty
 from kivy.lang import Builder
-from kivy.factory import Factory
+from kivy.factory import Factory as F
 
 import trio
 
@@ -95,11 +95,11 @@ KV_CODE = '''
 Builder.load_string(KV_CODE)
 
 
-class KTIcon(Factory.Label):
+class KTIcon(F.Label):
     icon = StringProperty()
 
 
-class KTButton(TrioUser, Factory.Label):
+class KTButton(TrioUser, F.Label):
     __events__ = ('on_press', 'on_release', )
     border_color = ColorProperty(theme.button_border_color)
     border_color2 = ColorProperty(theme.button_border_color2)
@@ -179,7 +179,7 @@ class KTIconButton(KTButton):
     icon = StringProperty()
 
 
-KTLabel = Factory.KTLabel
-KTTightLabel = Factory.KTTightLabel
-KTLabelButton = Factory.KTLabelButton
-KTTightButton = Factory.KTTightButton
+KTLabel = F.KTLabel
+KTTightLabel = F.KTTightLabel
+KTLabelButton = F.KTLabelButton
+KTTightButton = F.KTTightButton
