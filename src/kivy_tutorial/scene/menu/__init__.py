@@ -7,6 +7,7 @@ BoxLayout:
         valign: 'center'
         KTTightButton:
             text: '自己紹介'
+            on_release: root.switch_scene('aboutme')
     AnchorLayout:
         halign: 'center'
         valign: 'center'

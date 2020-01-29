@@ -1,0 +1,3 @@
+水戸う納豆齋(Nattosai Mito)
+
+programmingに関する文献を読むのが好きなだけで實際に作った數は少ないエセprogrammer。ちゃんとしたアプリと言えるものはこれが3個目。PythonとKivyしか扱えずprogrammingを糧にするのは不可能に近い状態。
