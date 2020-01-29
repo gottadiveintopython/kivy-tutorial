@@ -1,38 +1,22 @@
-KV_CODE = r'''
-BoxLayout:
-    opacity: 0
-    orientation: 'vertical'
-    AnchorLayout:
-        KTTightButton:
-            text: '自己紹介'
-            on_release: root.switch_scene('aboutme')
-    AnchorLayout:
-        KTTightButton:
-            text: '本編'
-    AnchorLayout:
-        KTTightButton:
-            text: '使用素材'
-            on_release: root.switch_scene('credits')
-    AnchorLayout:
-        KTTightButton:
-            text: '戻る'
-            on_release: root.switch_scene('title')
-'''
-
-
 async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
-    from kivy.lang import Builder
-    from kivy_tutorial.triouser import activate_nursery
     from kivy_tutorial.asynchelper import animation
+    from kivy_tutorial.widgets import KTMenu
 
     try:
         nursery.start_soon(_handle_on_go_back, switcher, drawer)
         appstate.bgm = 'n75.ogg'
         appstate.hide_drawer = False
-        with activate_nursery(nursery):
-            root = Builder.load_string(KV_CODE)
-        root.switch_scene = lambda name: switcher.switch(name)
+        root = KTMenu(nursery=nursery, opacity=0)
+        root.update(
+            switcher=switcher,
+            data=[
+                ('自己紹介', 'aboutme', ),
+                ('本編', 'menu.contents', ),
+                ('使用素材', 'credits', ),
+                ('戻る', 'title', ),
+            ]
+        )
         parent.add_widget(root)
         await animation(root, opacity=1, d=.5)
         await trio.sleep_forever()
