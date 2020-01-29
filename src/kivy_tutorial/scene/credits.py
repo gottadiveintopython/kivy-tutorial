@@ -42,8 +42,6 @@ BoxLayout:
         Widget:
     Widget:
     AnchorLayout:
-        halign: 'center'
-        valign: 'center'
         KTTightButton:
             text: '戻る'
             on_release: root.switch_scene('menu')

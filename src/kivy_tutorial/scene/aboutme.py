@@ -111,7 +111,7 @@ def _create_menu():
         ('youtube', 'https://www.youtube.com/channel/UCcu_WzusAoPX2cyi8K2N-0g'),
         ('email', 'mailto:flow4re2c@gmail.com'),
     ):
-        case = F.AnchorLayout(anchor_x='center', anchor_y='center')
+        case = F.AnchorLayout()
         button = F.KTIconButton(icon=icon, on_release=on_release)
         button.url = url
         case.add_widget(button)

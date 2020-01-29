@@ -3,25 +3,17 @@ BoxLayout:
     opacity: 0
     orientation: 'vertical'
     AnchorLayout:
-        halign: 'center'
-        valign: 'center'
         KTTightButton:
             text: '自己紹介'
             on_release: root.switch_scene('aboutme')
     AnchorLayout:
-        halign: 'center'
-        valign: 'center'
         KTTightButton:
             text: '本編'
     AnchorLayout:
-        halign: 'center'
-        valign: 'center'
         KTTightButton:
             text: '使用素材'
             on_release: root.switch_scene('credits')
     AnchorLayout:
-        halign: 'center'
-        valign: 'center'
         KTTightButton:
             text: '戻る'
             on_release: root.switch_scene('title')
