@@ -5,6 +5,8 @@ from kivy.config import Config
 Config.set('graphics', 'width', 1280)
 Config.set('graphics', 'height', 720)
 Config.set('graphics', 'maxfps', 60)
+import kivy
+kivy.require("2.0.0")
 from kivy.lang import Builder
 from kivy.app import App
 
