@@ -109,7 +109,7 @@ class KTIcon(F.Label):
 
 
 class KTButton(TrioUser, F.Label):
-    __events__ = ('on_press', 'on_release', )
+    __events__ = ('on_press', 'on_release', 'on_release_anim', )
     border_color = ColorProperty(theme.button_border_color)
     border_color2 = ColorProperty(theme.button_border_color2)
     background_color = ColorProperty(theme.button_background_color)
@@ -126,6 +126,9 @@ class KTButton(TrioUser, F.Label):
             soundplayer.play(self.sound)
 
     def on_release(self):
+        pass
+
+    def on_release_anim(self):
         pass
 
     async def _trio_main(self):
@@ -165,6 +168,7 @@ class KTButton(TrioUser, F.Label):
                     self.dispatch('on_release')
                     await animation(self, _scaling=.8, d=.05)
                     await animation(self, _scaling=1, d=.05)
+                    self.dispatch('on_release_anim')
         finally:
             if coro_blink is not None:
                 coro_blink.close()
@@ -201,12 +205,12 @@ class KTMenu(TrioUser, F.ScrollView):
         layout = self.ids.layout
         layout.clear_widgets()
         AnchorLayout = F.AnchorLayout
-        def on_release(button):
+        def on_release_anim(button):
             switcher.switch(button.linked_scene)
         with activate_nursery(self.nursery):
             for text, scene in data:
                 case = AnchorLayout(size_hint_min_y=dp(80))
-                button = KTTightButton(text=text, on_release=on_release)
+                button = KTTightButton(text=text, on_release_anim=on_release_anim)
                 button.linked_scene = scene
                 case.add_widget(button)
                 layout.add_widget(case)
