@@ -1,4 +1,4 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets
+# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets.basic
 
 KV_CODE = '''
 #:import webbrowser webbrowser
@@ -52,7 +52,7 @@ BoxLayout:
 async def main(switcher, nursery, *, parent, **kwargs):
     import trio
     from kivy.lang import Builder
-    import kivy_tutorial.widgets
+    import kivy_tutorial.widgets.basic
     from kivy_tutorial.triouser import activate_nursery
     try:
         with activate_nursery(nursery):

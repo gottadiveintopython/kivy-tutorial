@@ -20,7 +20,7 @@ async def main(*, nursery, parent):
     from kivy_tutorial.appstate import AppState
     from kivy_tutorial.bgmplayer import BgmPlayer
     from kivy_tutorial import background_animation
-    from kivy_tutorial.drawer import KTDrawer
+    from kivy_tutorial.widgets.drawer import KTDrawer
 
     with activate_nursery(nursery):
         appstate = AppState()
@@ -51,7 +51,7 @@ async def main(*, nursery, parent):
             nursery=nursery,
             parent=root.ids.bottom_layer,
         ))
-    # switcher.switch('visual_tests.widgets')
+    # switcher.switch('visual_tests.widgets.basic')
     switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
 

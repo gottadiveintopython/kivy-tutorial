@@ -1,4 +1,4 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.speechbubble
+# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets.speechbubble
 
 KV_CODE = '''
 <KTSpeechBubble2@KTSpeechBubble>
@@ -51,7 +51,7 @@ GridLayout:
 async def main(switcher, nursery, *, parent, **kwargs):
     import trio
     from kivy.lang import Builder
-    import kivy_tutorial.speechbubble
+    import kivy_tutorial.widgets.speechbubble
     from kivy_tutorial.triouser import activate_nursery
     try:
         with activate_nursery(nursery):

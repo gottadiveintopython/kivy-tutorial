@@ -1,9 +1,9 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.drawer
+# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets.drawer
 from kivy.lang import Builder
 
 
 KV_CODE = '''
-#:import __ kivy_tutorial.widgets
+#:import __ kivy_tutorial.widgets.basic
 
 RelativeLayout:
     StackLayout:

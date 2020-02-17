@@ -3,7 +3,7 @@ PREVIOUS_SCENE = 'menu'
 async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
     from kivy_tutorial.asynchelper import animation
-    from kivy_tutorial.widgets import KTMenu
+    from kivy_tutorial.widgets.basic import KTMenu
 
     try:
         nursery.start_soon(_handle_on_go_back, switcher, drawer)

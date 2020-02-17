@@ -3,7 +3,7 @@ import pytest
 
 
 async def test_props_watching(nursery):
-    from kivy_tutorial.magnet import KTMagnet
+    from kivy_tutorial.widgets.magnet import KTMagnet
     magnet = KTMagnet(nursery=nursery)
     assert set(magnet._props_watching.keys()) == \
         {'pos', 'size', }
@@ -14,7 +14,7 @@ async def test_props_watching(nursery):
 
 async def test_add_more_than_one_children(nursery):
     from kivy.uix.widget import Widget
-    from kivy_tutorial.magnet import KTMagnet
+    from kivy_tutorial.widgets.magnet import KTMagnet
     magnet = KTMagnet(nursery=nursery)
     magnet.add_widget(Widget())
     with pytest.raises(ValueError):
@@ -36,7 +36,7 @@ async def test_add_more_than_one_children(nursery):
 #     from math import isclose
 #     import trio
 #     from kivy.uix.widget import Widget
-#     from kivy_tutorial.magnet import KTMagnet
+#     from kivy_tutorial.widgets.magnet import KTMagnet
 #     magnet = KTMagnet(
 #         nursery=nursery,
 #         x=100, y=200,
@@ -56,7 +56,7 @@ async def test_add_more_than_one_children(nursery):
 #     from math import isclose
 #     import trio
 #     from kivy.uix.widget import Widget
-#     from kivy_tutorial.magnet import KTMagnet
+#     from kivy_tutorial.widgets.magnet import KTMagnet
 #     magnet = KTMagnet(
 #         nursery=nursery,
 #         x=100, y=200,
@@ -79,7 +79,7 @@ async def test_add_more_than_one_children(nursery):
 #     from math import isclose
 #     import trio
 #     from kivy.uix.widget import Widget
-#     from kivy_tutorial.magnet import KTMagnet
+#     from kivy_tutorial.widgets.magnet import KTMagnet
 #     magnet = KTMagnet(
 #         nursery=nursery,
 #         x=100, y=200,

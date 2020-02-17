@@ -4,7 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.behaviors import ButtonBehavior
 
 from kivy_tutorial.triouser import TrioUser
-from kivy_tutorial.widgets import KTIcon
+from kivy_tutorial.widgets.basic import KTIcon
 
 KV_CODE = '''
 #:import theme kivy_tutorial.theme

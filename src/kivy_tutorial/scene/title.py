@@ -3,7 +3,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
     from functools import partial
     from kivy.factory import Factory
     from kivy_tutorial.asynchelper import or_, animation, event
-    from kivy_tutorial.widgets import KTTightLabel, KTTightButton
+    from kivy_tutorial.widgets.basic import KTTightLabel, KTTightButton
 
     try:
         appstate.bgm = 'n75.ogg'

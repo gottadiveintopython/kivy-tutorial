@@ -6,7 +6,7 @@ from kivy.factory import Factory
 async def main(switcher, nursery, *, appstate, parent, **kwargs):
     from kivy.factory import Factory as F
     import trio
-    from kivy_tutorial.widgets import KTMenu
+    from kivy_tutorial.widgets.basic import KTMenu
     from kivy_tutorial.triouser import activate_nursery
     try:
         with activate_nursery(nursery):

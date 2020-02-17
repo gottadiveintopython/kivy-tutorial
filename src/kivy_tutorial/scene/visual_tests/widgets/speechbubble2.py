@@ -13,7 +13,7 @@ RelativeLayout:
 async def main(switcher, nursery, *, parent, **kwargs):
     import trio
     from kivy.lang import Builder
-    import kivy_tutorial.widgets
+    import kivy_tutorial.widgets.basic
     from kivy_tutorial.triouser import activate_nursery
     try:
         with activate_nursery(nursery):
@@ -32,8 +32,8 @@ async def main(switcher, nursery, *, parent, **kwargs):
 async def speak(parent, speaker_pos):
     import trio
     from kivy_tutorial.asynchelper import animation
-    from kivy_tutorial.speechbubble import KTSpeechBubble
-    from kivy_tutorial.widgets import KTLabel
+    from kivy_tutorial.widgets.speechbubble import KTSpeechBubble
+    from kivy_tutorial.widgets.basic import KTLabel
     bubble = KTSpeechBubble(
         pos=speaker_pos,
         size=(0, 0, ),
