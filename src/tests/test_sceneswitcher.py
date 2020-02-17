@@ -50,18 +50,11 @@ async def test_sceneswitcher(nursery, tmp_path, modify_sys_path):
     assert mymodule1.value == 'before1'
     assert mymodule2.value == 'before2'
     switcher.switch('mymodule1')
-    assert switcher.modules == {
-        'mymodule1': mymodule1,
-    }
     await trio.sleep(.1)
     assert switcher.local_nursery is not None
     assert mymodule1.value == 'after1'
     assert mymodule2.value == 'before2'
     switcher.switch('mymodule2')
-    assert switcher.modules == {
-        'mymodule1': mymodule1,
-        'mymodule2': mymodule2,
-    }
     await trio.sleep(.1)
     assert mymodule1.value == 'after1'
     assert mymodule2.value == 'after2'
