@@ -9,25 +9,27 @@ def add_resource_search_path(assets_dir):
     resource_remove_path(str(assets_dir))
 
 
-async def test_bgm_resumability(nursery):
-    import trio
-    from kivy.core.audio import SoundLoader
-    from kivy_tutorial.bgmplayer import Bgm
+# async def test_bgm_resumability(nursery):
+#     '''私の環境ではこのtestに失敗するとPCを再起動するまでPC上における全ての音が完全に
+#     鳴らなくなりやっかいなので、comment outしておく。'''
+#     import trio
+#     from kivy.core.audio import SoundLoader
+#     from kivy_tutorial.bgmplayer import Bgm
     
-    bgm = Bgm(SoundLoader.load("sound/n74.ogg"))
-    prev_pos = bgm.pos
-    await bgm.play()
-    curr_pos = bgm.pos
-    assert prev_pos < curr_pos
-    await bgm.stop()
-    prev_pos, curr_pos = curr_pos, bgm.pos
-    assert prev_pos < curr_pos
-    await bgm.play()
-    prev_pos, curr_pos = curr_pos, bgm.pos
-    assert prev_pos < curr_pos
-    await bgm.stop()
-    prev_pos, curr_pos = curr_pos, bgm.pos
-    assert prev_pos < curr_pos
+#     bgm = Bgm(SoundLoader.load("sound/n74.ogg"))
+#     prev_pos = bgm.pos
+#     await bgm.play()
+#     curr_pos = bgm.pos
+#     assert prev_pos < curr_pos
+#     await bgm.stop()
+#     prev_pos, curr_pos = curr_pos, bgm.pos
+#     assert prev_pos < curr_pos
+#     await bgm.play()
+#     prev_pos, curr_pos = curr_pos, bgm.pos
+#     assert prev_pos < curr_pos
+#     await bgm.stop()
+#     prev_pos, curr_pos = curr_pos, bgm.pos
+#     assert prev_pos < curr_pos
 
     
 async def test_play_then_stop_then_play_the_same_one(nursery):
