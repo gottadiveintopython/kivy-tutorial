@@ -48,8 +48,8 @@ async def main(*, nursery, parent):
         drawer.bind(on_go_home=lambda __: switcher.switch('title'))
         nursery.start_soon(partial(
             background_animation.play,
-            nursery=nursery,
-            parent=root.ids.bottom_layer,
+            widget=root.ids.bottom_layer,
+            color='#FFFFFF44'
         ))
     # switcher.switch('visual_tests.widgets.basic')
     switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
