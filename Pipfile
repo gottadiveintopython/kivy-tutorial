@@ -10,8 +10,8 @@ python_version = "3.7"
 cython = "==0.29.9"
 trio = "*"
 pillow = "*"
-kivy = {git = "git://github.com/kivy/kivy.git", ref="52d12ebf33e410c9f4798674a93cbd0db8038bf1"}
-asynckivy = {git = "https://github.com/gottadiveintopython/asynckivy"}
+kivy = {git = "git://github.com/kivy/kivy.git",ref = "master"}
+asynckivy = {editable = true,path = "./../asynckivy"}
 
 [dev-packages]
 pytest-trio = "*"
