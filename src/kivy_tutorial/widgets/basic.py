@@ -8,6 +8,7 @@ from kivy.properties import StringProperty, ColorProperty, NumericProperty
 from kivy.lang import Builder
 from kivy.factory import Factory as F
 import trio
+from asynckivy.compatibility.trio import run_coro_under_trio
 
 from kivy_tutorial.triouser import TrioUser
 from kivy_tutorial.soundplayer import global_instance as soundplayer
@@ -117,9 +118,8 @@ class KTButton(TrioUser, F.Label):
     _border_color = ColorProperty(border_color.defaultvalue)
     _scaling = NumericProperty(1)
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.nursery.start_soon(self._trio_main)
+    def on_kv_post(self, *args):
+        self.nursery.start_soon(run_coro_under_trio, self._ak_main())
 
     def on_press(self):
         if self.sound:
@@ -131,17 +131,7 @@ class KTButton(TrioUser, F.Label):
     def on_release_anim(self):
         pass
 
-    async def _trio_main(self):
-        import trio
-        import asynckivy
-        try:
-            coro = self._asynckivy_main()
-            asynckivy.start(coro)
-            await trio.sleep_forever()
-        finally:
-            coro.close()
-
-    async def _asynckivy_main(self):
+    async def _ak_main(self):
         import asynckivy
         from asynckivy import animation, or_, event
         
@@ -156,7 +146,7 @@ class KTButton(TrioUser, F.Label):
                 )
                 self.dispatch('on_press')
                 current_touch.grab(self)
-                coro_blink = self._blink()
+                coro_blink = self._ak_blink()
                 asynckivy.start(coro_blink)
                 await event(self, 'on_touch_up',
                     filter=lambda w, t: t is current_touch and t.grab_current is w,
@@ -175,8 +165,7 @@ class KTButton(TrioUser, F.Label):
             if current_touch is not None:
                 current_touch.ungrab(self)
 
-
-    async def _blink(self):
+    async def _ak_blink(self):
         from asynckivy import sleep
         try:
             while True:
