@@ -5,8 +5,9 @@ async def play(
         *, widget, canvas=None, max_sprites=1000, color='#FFFFFF',
         pointsize=1, image='', random=None, max_spawn_interval=.1,
         max_velocity_y=60):
-    import trio
-    await trio.sleep(0)
+    '''warning: not trio-flavored async funtion'''
+    import asynckivy as ak
+    await ak.sleep(0)
     
     if random is None:
         from random import Random
@@ -27,7 +28,7 @@ async def play(
         point_inst = Point(pointsize=pointsize, source=image)
 
     async def _spawn_sprite():
-        from trio import sleep
+        from asynckivy import sleep
         r = random
         min_x = min_y = -pointsize
         while True:
@@ -46,7 +47,7 @@ async def play(
             visible_arr[i] = 1
 
     async def _remove_sprite_if_its_outside_of_the_widget():
-        from trio import sleep
+        from asynckivy import sleep
         from itertools import compress, count
         min_y = -pointsize
         while True:
@@ -60,7 +61,7 @@ async def play(
                     visible_arr[i] = 0
 
     async def _move_sprites():
-        from trio import sleep
+        from asynckivy import sleep
         from time import perf_counter as get_current_time
         from itertools import compress, count, chain
         chain_from_iterable = chain.from_iterable
@@ -78,10 +79,16 @@ async def play(
                 compress(zip(x_arr, y_arr), visible_arr)))
     
     try:
-        async with trio.open_nursery() as nursery:
-            nursery.start_soon(_spawn_sprite)
-            nursery.start_soon(_remove_sprite_if_its_outside_of_the_widget)
-            nursery.start_soon(_move_sprites)
+        coro_spawn = _spawn_sprite()
+        coro_remove = _remove_sprite_if_its_outside_of_the_widget()
+        coro_move = _move_sprites()
+        ak.start(coro_spawn)
+        ak.start(coro_remove)
+        ak.start(coro_move)
+        await ak.sleep_forever()
     finally:
+        coro_spawn.close()
+        coro_remove.close()
+        coro_move.close()
         canvas.remove(point_inst)
         canvas.remove(color_inst)

@@ -15,6 +15,7 @@ async def main(*, nursery, parent):
     import os
     from functools import partial
     from kivy.lang import Builder
+    from asynckivy.compatibility.trio import run_coro_under_trio
     from kivy_tutorial.triouser import activate_nursery
     from kivy_tutorial.sceneswitcher import SceneSwitcher
     from kivy_tutorial.appstate import AppState
@@ -46,11 +47,14 @@ async def main(*, nursery, parent):
             },
         )
         drawer.bind(on_go_home=lambda __: switcher.switch('title'))
-        nursery.start_soon(partial(
-            background_animation.play,
-            widget=root.ids.bottom_layer,
-            color='#FFFFFF44'
-        ))
+        nursery.start_soon(
+            run_coro_under_trio,
+            background_animation.play(
+                widget=root.ids.bottom_layer,
+                color='#FFFFFF44',
+                max_sprites=200,
+            )
+        )
     # switcher.switch('visual_tests.widgets.basic')
     switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
