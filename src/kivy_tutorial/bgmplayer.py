@@ -1,7 +1,7 @@
 __all__ = ('BgmPlayer', )
 
 import trio
-from kivy_tutorial.asynchelper import animation
+from triohelper.kivy_awaitable import animation
 from triohelper.triouser import TrioUser
 
 

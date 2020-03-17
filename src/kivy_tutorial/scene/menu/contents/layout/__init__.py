@@ -2,7 +2,7 @@ PREVIOUS_SCENE = 'menu.contents'
 
 async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
-    from kivy_tutorial.asynchelper import animation
+    from triohelper.kivy_awaitable import animation
     from kivy_tutorial.widgets.basic import KTMenu
 
     try:
@@ -27,6 +27,6 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
 
 
 async def _handle_on_go_back(switcher, drawer):
-    from kivy_tutorial.asynchelper import event
+    from triohelper.kivy_awaitable import event
     await event(drawer, 'on_go_back')
     switcher.switch(PREVIOUS_SCENE)

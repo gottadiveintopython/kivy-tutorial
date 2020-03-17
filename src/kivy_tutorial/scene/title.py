@@ -2,7 +2,8 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
-    from kivy_tutorial.asynchelper import or_, animation, event
+    from triohelper import or_
+    from triohelper.kivy_awaitable import animation, event
     from kivy_tutorial.widgets.basic import KTTightLabel, KTTightButton
 
     try:

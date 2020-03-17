@@ -87,7 +87,7 @@ class KTDrawer(TrioUser, BoxLayout):
     async def _main(self, parent):
         from functools import partial
         import trio
-        from kivy_tutorial.asynchelper import event, animation
+        from triohelper.kivy_awaitable import event, animation
         from kivy_tutorial.soundplayer import global_instance as soundplayer
         await trio.sleep(.1)
         try:
