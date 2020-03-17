@@ -15,6 +15,7 @@ import trio
 async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
     from trio import sleep, current_time as get_current_time
     from kivy.animation import AnimationTransition
+    from asynckivy._animation._simple_ver import _calculate
     duration = kwargs.pop('d', kwargs.pop('duration', 1.))
     transition = kwargs.pop('t', kwargs.pop('transition', 'linear'))
     step = kwargs.pop('s', kwargs.pop('step', 0))
@@ -42,9 +43,6 @@ async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
             setattr(target, key, b)
         return
 
-    # assigning to a local variable might improve performance
-    calculate = _calculate
-
     start_time = get_current_time()
     try:
         while True:
@@ -57,7 +55,7 @@ async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
             # apply progression on target
             for key, values in properties.items():
                 a, b = values
-                value = calculate(a, b, t)
+                value = _calculate(a, b, t)
                 setattr(target, key, value)
 
             # time to stop ?
@@ -68,24 +66,3 @@ async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
             for key, values in properties.items():
                 a, b = values
                 setattr(target, key, b)
-
-
-def _calculate(a, b, t):
-    if isinstance(a, list) or isinstance(a, tuple):
-        if isinstance(a, list):
-            tp = list
-        else:
-            tp = tuple
-        return tp([_calculate(a[x], b[x], t) for x in range(len(a))])
-    elif isinstance(a, dict):
-        d = {}
-        for x in iterkeys(a):
-            if x not in b:
-                # User requested to animate only part of the dict.
-                # Copy the rest
-                d[x] = a[x]
-            else:
-                d[x] = _calculate(a[x], b[x], t)
-        return d
-    else:
-        return (a * (1. - t)) + (b * t)
