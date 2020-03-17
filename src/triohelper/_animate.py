@@ -1,18 +1,15 @@
-'''kivy/animation.pyを元にしたanimation用のasync関数
-
-Usage
-=====
-
-    async def some_async_func(widget):
-        await animation(widget, width=200, t='in_sin', d=2)
-'''
-
 __all__ = ('animation', )
 
 import trio
 
 
 async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
+    '''kivy.animation.Animationを真似たもの
+
+    warning:
+        これはkivyの時計を使わずにtrioの時計を使っているので、描画関係には使うべきでは無い。
+        そういった場合は代わりに 'triohelper.kivy_awaitable.animate()' を使うこと。
+    '''
     from trio import sleep, current_time as get_current_time
     from kivy.animation import AnimationTransition
     from asynckivy._animation._simple_ver import _calculate
