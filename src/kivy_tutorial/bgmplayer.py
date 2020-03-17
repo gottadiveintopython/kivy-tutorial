@@ -26,7 +26,7 @@ class Bgm:
         sound = self.sound
         if sound.state == 'stop':
             return
-        await animate(sound, volume=0)
+        await animate(sound, volume=0, step=.05)
         self._pos = sound.get_pos()
         sound.stop()
         await trio.sleep(.1)
@@ -39,7 +39,7 @@ class Bgm:
         sound.play()
         await trio.sleep(.1)  # play()のあと直ちにseek()はできないのでsleep()を挟む
         sound.seek(self._pos)
-        await animate(sound, volume=.5)
+        await animate(sound, volume=.5, step=.05)
 
 
 class BgmPlayer(TrioUser):
