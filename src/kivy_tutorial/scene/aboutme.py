@@ -30,7 +30,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     from kivy.lang import Builder
     from kivy.factory import Factory as F
     from kivy.resources import resource_find
-    from kivy_tutorial.triouser import activate_nursery
+    from triohelper.triouser import activate_nursery
     from kivy_tutorial.asynchelper import animation
 
     try:

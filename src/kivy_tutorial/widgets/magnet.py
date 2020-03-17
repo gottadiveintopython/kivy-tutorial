@@ -6,7 +6,7 @@ __all__ = ('KTMagnet', )
 
 from kivy.uix.widget import Widget
 from kivy.properties import NumericProperty, StringProperty, ListProperty
-from kivy_tutorial.triouser import TrioUser
+from triohelper.triouser import TrioUser
 
 
 class KTMagnet(TrioUser, Widget):

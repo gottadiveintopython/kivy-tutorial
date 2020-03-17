@@ -51,7 +51,7 @@ BoxLayout:
 async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
     from kivy.lang import Builder
-    from kivy_tutorial.triouser import activate_nursery
+    from triohelper.triouser import activate_nursery
     from kivy_tutorial.asynchelper import animation
 
     try:

@@ -1,6 +1,6 @@
 __all__ = ('SceneSwitcher', )
 
-from kivy_tutorial.triouser import TrioUser
+from triohelper.triouser import TrioUser
 
 
 class SceneSwitcher(TrioUser):

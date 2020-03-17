@@ -52,7 +52,7 @@ async def main(switcher, nursery, *, parent, **kwargs):
     import trio
     from kivy.lang import Builder
     import kivy_tutorial.widgets.speechbubble
-    from kivy_tutorial.triouser import activate_nursery
+    from triohelper.triouser import activate_nursery
     try:
         with activate_nursery(nursery):
             root = Builder.load_string(KV_CODE)

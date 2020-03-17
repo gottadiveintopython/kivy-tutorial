@@ -2,20 +2,20 @@ import pytest
 
 
 def test_when_there_is_no_active_nursery():
-    from kivy_tutorial.triouser import TrioUser
+    from triohelper.triouser import TrioUser
     with pytest.raises(IndexError):
         TrioUser()
 
 
 async def test_when_there_is_no_active_nursery2(nursery):
-    from kivy_tutorial.triouser import TrioUser
+    from triohelper.triouser import TrioUser
     user = TrioUser(nursery=nursery)
     assert user.nursery is nursery
 
 
 async def test_activate_nursery(nursery):
     import trio
-    from kivy_tutorial.triouser import activate_nursery, TrioUser
+    from triohelper.triouser import activate_nursery, TrioUser
     with activate_nursery(nursery):
         user = TrioUser()
         assert user.nursery is nursery
@@ -28,7 +28,7 @@ async def test_activate_nursery(nursery):
 
 
 async def test_argument_processing(nursery):
-    from kivy_tutorial.triouser import TrioUser
+    from triohelper.triouser import TrioUser
     class ArgHolder:
         def __init__(self, *args, **kwargs):
             self.args = args

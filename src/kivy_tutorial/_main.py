@@ -16,7 +16,7 @@ async def main(*, nursery, parent):
     from functools import partial
     from kivy.lang import Builder
     from asynckivy.compatibility.trio import run_coro_under_trio
-    from kivy_tutorial.triouser import activate_nursery
+    from triohelper.triouser import activate_nursery
     from kivy_tutorial.sceneswitcher import SceneSwitcher
     from kivy_tutorial.appstate import AppState
     from kivy_tutorial.bgmplayer import BgmPlayer

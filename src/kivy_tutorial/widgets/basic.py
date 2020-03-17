@@ -10,7 +10,7 @@ from kivy.factory import Factory as F
 import trio
 from asynckivy.compatibility.trio import run_coro_under_trio
 
-from kivy_tutorial.triouser import TrioUser
+from triohelper.triouser import TrioUser
 from kivy_tutorial.soundplayer import global_instance as soundplayer
 from kivy_tutorial import theme
 
@@ -190,7 +190,7 @@ KTTightButton = F.KTTightButton
 class KTMenu(TrioUser, F.ScrollView):
     def update(self, *, data:typing.Iterator[typing.Tuple[str, str]], switcher):
         from kivy.metrics import dp
-        from kivy_tutorial.triouser import activate_nursery
+        from triohelper.triouser import activate_nursery
         layout = self.ids.layout
         layout.clear_widgets()
         AnchorLayout = F.AnchorLayout

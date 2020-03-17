@@ -21,7 +21,7 @@ RelativeLayout:
 
 async def main(switcher, nursery, *, appstate, parent, **kwargs):
     import trio
-    from kivy_tutorial.triouser import activate_nursery
+    from triohelper.triouser import activate_nursery
     try:
         with activate_nursery(nursery):
             root = Builder.load_string(KV_CODE)

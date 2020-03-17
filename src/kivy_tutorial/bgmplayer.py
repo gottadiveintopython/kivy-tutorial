@@ -2,7 +2,7 @@ __all__ = ('BgmPlayer', )
 
 import trio
 from kivy_tutorial.asynchelper import animation
-from kivy_tutorial.triouser import TrioUser
+from triohelper.triouser import TrioUser
 
 
 class Bgm:
