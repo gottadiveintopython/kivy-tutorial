@@ -47,12 +47,12 @@ class KTMagnet(TrioUser, Widget):
     async def _start_anim_core(self):
         from functools import partial
         import trio
-        from triohelper.kivy_awaitable import animation
+        from triohelper.kivy_awaitable import animate
         child = self.children[0]
         async with trio.open_nursery() as sub_nursery:
             self._sub_nursery = sub_nursery
             sub_nursery.start_soon(partial(
-                animation, child,
+                animate, child,
                 d=self.duration,
                 t=self.transition,
                 **{prop: getattr(self, prop) for prop in self.anim_props}

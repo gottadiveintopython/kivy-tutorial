@@ -31,7 +31,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     from kivy.factory import Factory as F
     from kivy.resources import resource_find
     from triohelper.triouser import activate_nursery
-    from triohelper.kivy_awaitable import animation
+    from triohelper.kivy_awaitable import animate
 
     try:
         nursery.start_soon(_handle_on_go_back, switcher, drawer)
@@ -48,20 +48,20 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
             )
             root.add_widget(antelope)
         await trio.sleep(.2)
-        await animation(antelope, opacity=1, d=.5)
+        await animate(antelope, opacity=1, d=.5)
 
         async with trio.open_nursery() as sub_nursery:
             where_antelope_goes = root.ids.where_antelope_goes
             antelope.size_hint = (None, None, )
             sub_nursery.start_soon(partial(
-                animation, antelope, d=1,
+                animate, antelope, d=1,
                 pos=where_antelope_goes.pos,
                 size=where_antelope_goes.size,
             ))
 
             desc = root.ids.desc
             desc.text = Path(resource_find(r'text/aboutme.txt')).read_text(encoding='utf-8')
-            sub_nursery.start_soon(partial(animation, desc, d=2, opacity=1))
+            sub_nursery.start_soon(partial(animate, desc, d=2, opacity=1))
 
             where_menu_goes = root.ids.where_menu_goes
             with activate_nursery(nursery):
@@ -71,7 +71,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
             menu.x = where_menu_goes.x
             menu.top = where_menu_goes.y
             root.add_widget(menu)
-            await animation(menu, y=where_menu_goes.y, d=1)
+            await animate(menu, y=where_menu_goes.y, d=1)
 
         root.remove_widget(antelope)
         antelope.size_hint = (1, 1, )
@@ -87,7 +87,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     finally:
         with trio.move_on_after(1) as cleanup_scope:
             cleanup_scope.shield = True
-            await animation(root, opacity=0, d=.5)
+            await animate(root, opacity=0, d=.5)
             parent.remove_widget(root)
 
 

@@ -87,7 +87,7 @@ class KTDrawer(TrioUser, BoxLayout):
     async def _main(self, parent):
         from functools import partial
         import trio
-        from triohelper.kivy_awaitable import event, animation
+        from triohelper.kivy_awaitable import event, animate
         from kivy_tutorial.soundplayer import global_instance as soundplayer
         await trio.sleep(.1)
         try:
@@ -106,12 +106,12 @@ class KTDrawer(TrioUser, BoxLayout):
                 parent.unbind(width=place_drawer_to_unseen_position)
                 async with trio.open_nursery() as nursery:
                     nursery.start_soon(partial(
-                        animation, self,
+                        animate, self,
                         right=parent.width,
                         d=.3
                     ))
                     nursery.start_soon(partial(
-                        animation, tab,
+                        animate, tab,
                         icon_angle=180.,
                         d=.3
                     ))
@@ -121,12 +121,12 @@ class KTDrawer(TrioUser, BoxLayout):
                 del self.pos_hint['right']
                 async with trio.open_nursery() as nursery:
                     nursery.start_soon(partial(
-                        animation, self,
+                        animate, self,
                         x=parent.width - tab.width,
                         d=.3
                     ))
                     nursery.start_soon(partial(
-                        animation, tab,
+                        animate, tab,
                         icon_angle=0.,
                         d=.3
                     ))

@@ -1,7 +1,7 @@
 __all__ = ('BgmPlayer', )
 
 import trio
-from triohelper import animation
+from triohelper import animate
 from triohelper.triouser import TrioUser
 
 
@@ -26,7 +26,7 @@ class Bgm:
         sound = self.sound
         if sound.state == 'stop':
             return
-        await animation(sound, volume=0)
+        await animate(sound, volume=0)
         self._pos = sound.get_pos()
         sound.stop()
         await trio.sleep(.1)
@@ -39,7 +39,7 @@ class Bgm:
         sound.play()
         await trio.sleep(.1)  # play()のあと直ちにseek()はできないのでsleep()を挟む
         sound.seek(self._pos)
-        await animation(sound, volume=.5)
+        await animate(sound, volume=.5)
 
 
 class BgmPlayer(TrioUser):

@@ -1,4 +1,4 @@
-__all__ = ('animation', )
+__all__ = ('animate', )
 
 import trio
 from functools import partial
@@ -7,7 +7,7 @@ from kivy.animation import AnimationTransition
 from asynckivy._animation._simple_ver import _calculate
 
 
-async def animation(target, **kwargs):
+async def animate(target, **kwargs):
     '''kivy.animation.Animationを真似たもの'''
     duration = kwargs.pop('d', kwargs.pop('duration', 1.))
     transition = kwargs.pop('t', kwargs.pop('transition', 'linear'))

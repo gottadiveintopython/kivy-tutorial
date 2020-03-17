@@ -133,7 +133,7 @@ class KTButton(TrioUser, F.Label):
 
     async def _ak_main(self):
         import asynckivy
-        from asynckivy import animation, or_, event
+        from asynckivy import animate, or_, event
         
         coro_blink = None
         current_touch = None
@@ -156,8 +156,8 @@ class KTButton(TrioUser, F.Label):
                 current_touch.ungrab(self)
                 if self.collide_point(*current_touch.pos):
                     self.dispatch('on_release')
-                    await animation(self, _scaling=.8, d=.05)
-                    await animation(self, _scaling=1, d=.05)
+                    await animate(self, _scaling=.8, d=.05)
+                    await animate(self, _scaling=1, d=.05)
                     self.dispatch('on_release_anim')
         finally:
             if coro_blink is not None:

@@ -52,7 +52,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
     from kivy.lang import Builder
     from triohelper.triouser import activate_nursery
-    from triohelper.kivy_awaitable import animation
+    from triohelper.kivy_awaitable import animate
 
     try:
         nursery.start_soon(_handle_on_go_back, switcher, drawer)
@@ -62,12 +62,12 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
             root = Builder.load_string(KV_CODE)
         root.switch_scene = lambda name: switcher.switch(name)
         parent.add_widget(root)
-        await animation(root, opacity=1, d=.5)
+        await animate(root, opacity=1, d=.5)
         await trio.sleep_forever()
     finally:
         with trio.move_on_after(1) as cleanup_scope:
             cleanup_scope.shield = True
-            await animation(root, opacity=0, d=.5)
+            await animate(root, opacity=0, d=.5)
             parent.remove_widget(root)
 
 

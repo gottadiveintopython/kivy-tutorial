@@ -3,7 +3,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
     from functools import partial
     from kivy.factory import Factory
     from triohelper import or_
-    from triohelper.kivy_awaitable import animation, event
+    from triohelper.kivy_awaitable import animate, event
     from kivy_tutorial.widgets.basic import KTTightLabel, KTTightButton
 
     try:
@@ -23,7 +23,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
             await trio.sleep(0.1)
             title_label.y = root.height
             await or_(
-                animation(
+                animate(
                     title_label,
                     d=3,
                     opacity=1,
@@ -49,7 +49,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
             root.add_widget(start_button)
             await trio.sleep(0.01)
             await or_(
-                animation(
+                animate(
                     start_button,
                     d=3,
                     opacity=1,
@@ -60,7 +60,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
         await _show_start_button()
 
         await event(start_button, 'on_release')
-        await animation(root, opacity=0)
+        await animate(root, opacity=0)
         switcher.switch('menu')
     finally:
         parent.remove_widget(root)

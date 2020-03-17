@@ -1,9 +1,9 @@
-__all__ = ('animation', )
+__all__ = ('animate', )
 
 import trio
 
 
-async def animation(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
+async def animate(target, *, task_status=trio.TASK_STATUS_IGNORED, **kwargs):
     '''kivy.animation.Animationを真似たもの
 
     warning:

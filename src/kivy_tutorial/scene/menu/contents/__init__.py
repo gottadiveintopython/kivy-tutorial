@@ -2,7 +2,7 @@ PREVIOUS_SCENE = 'menu'
 
 async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     import trio
-    from triohelper.kivy_awaitable import animation
+    from triohelper.kivy_awaitable import animate
     from kivy_tutorial.widgets.basic import KTMenu
 
     try:
@@ -18,12 +18,12 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
             ]
         )
         parent.add_widget(root)
-        await animation(root, opacity=1, d=.5)
+        await animate(root, opacity=1, d=.5)
         await trio.sleep_forever()
     finally:
         with trio.move_on_after(1) as cleanup_scope:
             cleanup_scope.shield = True
-            await animation(root, opacity=0, d=.5)
+            await animate(root, opacity=0, d=.5)
             parent.remove_widget(root)
 
 

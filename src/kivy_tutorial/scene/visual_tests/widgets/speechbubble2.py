@@ -31,7 +31,7 @@ async def main(switcher, nursery, *, parent, **kwargs):
 
 async def speak(parent, speaker_pos):
     import trio
-    from triohelper.kivy_awaitable import animation
+    from triohelper.kivy_awaitable import animate
     from kivy_tutorial.widgets.speechbubble import KTSpeechBubble
     from kivy_tutorial.widgets.basic import KTLabel
     bubble = KTSpeechBubble(
@@ -41,7 +41,7 @@ async def speak(parent, speaker_pos):
         speaker_pos=speaker_pos,
     )
     parent.add_widget(bubble)
-    await animation(
+    await animate(
         bubble, size=(200, 100),
         center=(speaker_pos[0] + 200, speaker_pos[1]),
         d=.2,
