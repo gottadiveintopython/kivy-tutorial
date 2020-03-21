@@ -12,6 +12,7 @@ trio = "*"
 pillow = "*"
 kivy = {git = "git://github.com/kivy/kivy.git",ref = "master"}
 asynckivy = {editable = true,path = "./../asynckivy"}
+pyyaml = "*"
 
 [dev-packages]
 pytest-trio = "*"
