@@ -58,7 +58,6 @@ async def main(*, nursery, parent):
                 max_sprites=200,
             )
         )
-    # switcher.switch('visual_tests.widgets.basic')
     switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
 

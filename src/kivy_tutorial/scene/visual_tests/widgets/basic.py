@@ -1,5 +1,3 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets.basic
-
 KV_CODE = '''
 #:import webbrowser webbrowser
 

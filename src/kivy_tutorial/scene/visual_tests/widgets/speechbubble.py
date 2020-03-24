@@ -1,5 +1,3 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.widgets.speechbubble
-
 KV_CODE = '''
 <KTSpeechBubble2@KTSpeechBubble>
     background_color: 1, 1, 1, .3

@@ -6,4 +6,10 @@
       B: B
       C: C
 使用素材: credits
+開発者用めにゅ〜:
+  てすとぉ:
+    widget:
+      基本的なwidget達: visual_tests.widgets.basic
+      吹き出し1: visual_tests.widgets.speechbubble
+      吹き出し2: visual_tests.widgets.speechbubble2
 titleへ戻る: title

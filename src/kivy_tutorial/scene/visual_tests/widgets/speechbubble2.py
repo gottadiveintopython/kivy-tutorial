@@ -1,5 +1,3 @@
-# export KIVY_TUTORIAL_FIRST_SCENE=visual_tests.speechbubble2
-
 KV_CODE = '''
 RelativeLayout:
     Image:
