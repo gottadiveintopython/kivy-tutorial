@@ -1,4 +1,4 @@
-async def main(switcher, nursery, *, parent, appstate, menu, **kwargs):
+async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
@@ -11,6 +11,9 @@ async def main(switcher, nursery, *, parent, appstate, menu, **kwargs):
         menu.reset()
         root = Factory.RelativeLayout()
         parent.add_widget(root)
+
+        # ignore 'on_go_back' during this scene
+        bind_uid = drawer.fbind('on_go_back', lambda *args, **kwargs:True)
 
         async def _show_title_label():
             title_label = KTTightLabel(
@@ -63,4 +66,5 @@ async def main(switcher, nursery, *, parent, appstate, menu, **kwargs):
         await animate(root, opacity=0)
         switcher.switch('menu')
     finally:
+        drawer.unbind_uid('on_go_back', bind_uid)
         parent.remove_widget(root)

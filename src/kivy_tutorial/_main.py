@@ -26,7 +26,10 @@ async def main(*, nursery, parent):
 
     with activate_nursery(nursery):
         appstate = AppState()
-        drawer = KTDrawer(appstate=appstate)
+        drawer = KTDrawer(
+            appstate=appstate,
+            on_go_back=lambda __: switcher.switch('menu'),
+        )
         bgmplayer = BgmPlayer(file_prefix='sound/')
         menu = KTMenu(
             source='menu.yaml',

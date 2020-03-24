@@ -23,7 +23,7 @@ RelativeLayout:
 '''
 
 
-async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
+async def main(switcher, nursery, *, parent, appstate, **kwargs):
     from functools import partial
     from pathlib import Path
     import trio
@@ -34,7 +34,6 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     from triohelper.kivy_awaitable import animate
 
     try:
-        nursery.start_soon(_handle_on_go_back, switcher, drawer)
         appstate.bgm = 'n75.ogg'
 
         with activate_nursery(nursery):
@@ -88,12 +87,6 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
             cleanup_scope.shield = True
             await animate(root, opacity=0, d=.5)
             parent.remove_widget(root)
-
-
-async def _handle_on_go_back(switcher, drawer):
-    from triohelper.kivy_awaitable import event
-    await event(drawer, 'on_go_back')
-    switcher.switch('menu')
 
 
 def _create_menu():
