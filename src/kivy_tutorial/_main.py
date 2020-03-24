@@ -34,14 +34,10 @@ async def main(*, nursery, parent):
         )
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
+        drawer.attach(root.ids.top_layer)
         appstate.bind(
             bgm=partial(_change_bgm, bgmplayer=bgmplayer),
             mute_bgm=partial(_mute_or_unmute_bgm, bgmplayer=bgmplayer),
-            hide_drawer=partial(
-                _hide_or_unhide_drawer,
-                drawer=drawer,
-                parent=root.ids.top_layer
-            ),
         )
         switcher = SceneSwitcher(
             pkgname='kivy_tutorial.scene',
@@ -77,10 +73,3 @@ def _mute_or_unmute_bgm(appstate, mute, *, bgmplayer):
         bgmplayer.stop()
     else:
         bgmplayer.play(appstate.bgm)
-
-
-def _hide_or_unhide_drawer(appstate, hide, *, drawer, parent):
-    if hide:
-        drawer.detach()
-    else:
-        drawer.attach(parent)

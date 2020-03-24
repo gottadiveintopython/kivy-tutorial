@@ -57,7 +57,6 @@ async def main(switcher, nursery, *, parent, appstate, drawer, **kwargs):
     try:
         nursery.start_soon(_handle_on_go_back, switcher, drawer)
         appstate.bgm = 'n75.ogg'
-        appstate.hide_drawer = False
         with activate_nursery(nursery):
             root = Builder.load_string(KV_CODE)
         root.switch_scene = lambda name: switcher.switch(name)
