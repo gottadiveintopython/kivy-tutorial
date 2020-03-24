@@ -87,8 +87,10 @@ class KTDrawer(TrioUser, BoxLayout):
     async def _main(self, parent):
         from functools import partial
         import trio
+        from kivy.core.audio import SoundLoader
         from triohelper.kivy_awaitable import event, animate
-        from kivy_tutorial.soundplayer import global_instance as soundplayer
+
+        sound = SoundLoader.load('sound/button.ogg')
         await trio.sleep(.1)
         try:
             tab = self.ids.tab
@@ -102,7 +104,7 @@ class KTDrawer(TrioUser, BoxLayout):
             await trio.sleep(.1)
             while True:
                 await event(tab, 'on_press')
-                soundplayer.play('button.ogg')
+                sound.play()
                 parent.unbind(width=place_drawer_to_unseen_position)
                 async with trio.open_nursery() as nursery:
                     nursery.start_soon(partial(
@@ -117,7 +119,7 @@ class KTDrawer(TrioUser, BoxLayout):
                     ))
                 self.pos_hint['right'] = 1.
                 await event(tab, 'on_press')
-                soundplayer.play('button.ogg')
+                sound.play()
                 del self.pos_hint['right']
                 async with trio.open_nursery() as nursery:
                     nursery.start_soon(partial(

@@ -11,7 +11,6 @@ import trio
 from asynckivy.compatibility.trio import run_coro_under_trio
 
 from triohelper.triouser import TrioUser
-from kivy_tutorial.soundplayer import global_instance as soundplayer
 from kivy_tutorial import theme
 
 
@@ -105,7 +104,7 @@ class KTButton(TrioUser, F.Label):
     border_color = ColorProperty(theme.button_border_color)
     border_color2 = ColorProperty(theme.button_border_color2)
     background_color = ColorProperty(theme.button_background_color)
-    sound = StringProperty('button.ogg')
+    soundfile = StringProperty('sound/button.ogg')
     _border_color = ColorProperty(border_color.defaultvalue)
     _scaling = NumericProperty(1)
 
@@ -113,8 +112,8 @@ class KTButton(TrioUser, F.Label):
         self.nursery.start_soon(run_coro_under_trio, self._ak_main())
 
     def on_press(self):
-        if self.sound:
-            soundplayer.play(self.sound)
+        from kivy.core.audio import SoundLoader
+        SoundLoader.load(self.soundfile).play()
 
     def on_release(self):
         pass
