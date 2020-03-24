@@ -38,10 +38,8 @@ async def main(*, nursery, parent):
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
         drawer.attach(root.ids.top_layer)
-        appstate.bind(
-            bgm=partial(_change_bgm, bgmplayer=bgmplayer),
-            mute_bgm=partial(_mute_or_unmute_bgm, bgmplayer=bgmplayer),
-        )
+        update_bgm = partial(_update_bgm, bgmplayer=bgmplayer)
+        appstate.bind(bgm=update_bgm, mute_bgm=update_bgm)
         switcher = SceneSwitcher(
             pkgname='kivy_tutorial.scene',
             userdata={
@@ -64,15 +62,8 @@ async def main(*, nursery, parent):
     switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
 
-def _change_bgm(appstate, file, *, bgmplayer):
+def _update_bgm(appstate, __, *, bgmplayer):
     if appstate.mute_bgm:
-        bgmplayer.stop()
-    else:
-        bgmplayer.play(file)
-
-
-def _mute_or_unmute_bgm(appstate, mute, *, bgmplayer):
-    if mute:
         bgmplayer.stop()
     else:
         bgmplayer.play(appstate.bgm)
