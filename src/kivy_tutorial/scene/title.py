@@ -1,4 +1,4 @@
-async def main(switcher, nursery, *, parent, appstate, **kwargs):
+async def main(switcher, nursery, *, parent, appstate, menu, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
@@ -9,6 +9,7 @@ async def main(switcher, nursery, *, parent, appstate, **kwargs):
     try:
         appstate.bgm = 'n75.ogg'
         # appstate.hide_drawer = True
+        menu.reset()
         root = Factory.RelativeLayout()
         parent.add_widget(root)
 

@@ -22,11 +22,16 @@ async def main(*, nursery, parent):
     from kivy_tutorial.bgmplayer import BgmPlayer
     from kivy_tutorial import background_animation
     from kivy_tutorial.widgets.drawer import KTDrawer
+    from kivy_tutorial.widgets.menu import KTMenu
 
     with activate_nursery(nursery):
         appstate = AppState()
         drawer = KTDrawer(appstate=appstate)
         bgmplayer = BgmPlayer(file_prefix='sound/')
+        menu = KTMenu(
+            source='menu.yaml',
+            on_leaf_node=lambda __, scene_name: switcher.switch(scene_name),
+        )
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
         appstate.bind(
@@ -44,6 +49,7 @@ async def main(*, nursery, parent):
                 'parent': root.ids.middle_layer,
                 'appstate': appstate,
                 'drawer': drawer,
+                'menu': menu,
             },
         )
         drawer.bind(on_go_home=lambda __: switcher.switch('title'))

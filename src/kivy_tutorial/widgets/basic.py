@@ -1,6 +1,6 @@
 __all__ = (
     'KTLabel', 'KTTightLabel', 'KTButton', 'KTTightButton', 'KTLabelButton',
-    'KTIcon', 'KTIconButton', 'KTMenu',
+    'KTIcon', 'KTIconButton',
 )
 import typing
 
@@ -92,15 +92,6 @@ KV_CODE = '''
             pos: self.x + dp(4), self.y + dp(4)
             size: self.width - dp(8), self.height - dp(8)
         PopMatrix:
-
-<KTMenu>:
-    do_scroll_x: False
-    BoxLayout:
-        id: layout
-        padding: dp(50)
-        orientation: 'vertical'
-        size_hint_y: None
-        height: max(self.minimum_height, root.height)
 '''
 Builder.load_string(KV_CODE)
 
@@ -185,21 +176,3 @@ KTLabel = F.KTLabel
 KTTightLabel = F.KTTightLabel
 KTLabelButton = F.KTLabelButton
 KTTightButton = F.KTTightButton
-
-
-class KTMenu(TrioUser, F.ScrollView):
-    def update(self, *, data:typing.Iterator[typing.Tuple[str, str]], switcher):
-        from kivy.metrics import dp
-        from triohelper.triouser import activate_nursery
-        layout = self.ids.layout
-        layout.clear_widgets()
-        AnchorLayout = F.AnchorLayout
-        def on_release_anim(button):
-            switcher.switch(button.linked_scene)
-        with activate_nursery(self.nursery):
-            for text, scene in data:
-                case = AnchorLayout(size_hint_min_y=dp(80))
-                button = KTTightButton(text=text, on_release_anim=on_release_anim)
-                button.linked_scene = scene
-                case.add_widget(button)
-                layout.add_widget(case)
