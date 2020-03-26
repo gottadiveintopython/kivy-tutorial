@@ -85,6 +85,8 @@ class KTMenu(TrioUser, ScreenManager):
         self.root_node = root_node
 
     def switch_page(self, *, branch:Branch, transition=None):
+        if self.transition.is_active:
+            return
         next_scr_name = self.next()
         next_scr = self.get_screen(next_scr_name)
         next_scr.clear_widgets()
