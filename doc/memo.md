@@ -33,3 +33,11 @@ sound = SoundLoader.load(...)
 sound.play()
 Clock.schedule_once(lambda __: sound.seek(3), 0.1)
 ```
+
+# ShaderTransitionの不都合
+
+ShaderTransitionによる切り替え中は後ろにあるwidgetが表示されない。
+
+# Kivyに依存していない状態のSceneSwitcher
+
+- b8147356f6cdbc1be0027b5441c4f3774879646f

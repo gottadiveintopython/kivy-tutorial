@@ -1,4 +1,6 @@
-async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
+async def main(
+        switcher, nursery, *, parent, appstate, drawer, menu,
+        task_status, **kwargs):
     import trio
     from functools import partial
     from kivy.factory import Factory
@@ -9,11 +11,12 @@ async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
     try:
         appstate.bgm = 'n75.ogg'
         menu.reset()
-        root = Factory.RelativeLayout()
-        parent.add_widget(root)
 
-        # ignore 'on_go_back' during this scene
-        bind_uid = drawer.fbind('on_go_back', lambda *args, **kwargs:True)
+        # ignore 'on_go_back' and 'on_go_home' during the scene
+        avoid_event = lambda *args, **kwargs: True
+        drawer.bind(on_go_back=avoid_event, on_go_home=avoid_event)
+
+        task_status.started()
 
         async def _show_title_label():
             title_label = KTTightLabel(
@@ -22,18 +25,18 @@ async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
                 font_size='70sp',
                 pos_hint={'center_x': .5, },
             )
-            root.add_widget(title_label)
+            parent.add_widget(title_label)
             await trio.sleep(0.1)
-            title_label.y = root.height
+            title_label.y = parent.height
             await or_(
                 animate(
                     title_label,
                     d=3,
                     opacity=1,
-                    center_y=root.height * 0.6,
+                    center_y=parent.height * 0.6,
                     force_final_value=True,
                 ),
-                event(root, 'on_touch_down'),
+                event(parent, 'on_touch_down'),
             )
             title_label.pos_hint['center_y'] = 0.6
             title_label.property('pos_hint').dispatch(title_label)
@@ -49,7 +52,7 @@ async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
                 font_size='70sp',
                 pos_hint={'center_x': .5, 'center_y': .25, },
             )
-            root.add_widget(start_button)
+            parent.add_widget(start_button)
             await trio.sleep(0.01)
             await or_(
                 animate(
@@ -58,13 +61,11 @@ async def main(switcher, nursery, *, parent, appstate, drawer, menu, **kwargs):
                     opacity=1,
                     force_final_value=True,
                 ),
-                event(root, 'on_touch_down'),
+                event(parent, 'on_touch_down'),
             )
         await _show_start_button()
 
-        await event(start_button, 'on_release')
-        await animate(root, opacity=0)
-        switcher.switch('menu')
+        await event(start_button, 'on_release_anim')
+        switcher.ask_to_switch('menu')
     finally:
-        drawer.unbind_uid('on_go_back', bind_uid)
-        parent.remove_widget(root)
+        drawer.unbind(on_go_back=avoid_event, on_go_home=avoid_event)

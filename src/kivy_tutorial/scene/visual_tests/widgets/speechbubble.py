@@ -46,15 +46,14 @@ GridLayout:
 '''
 
 
-async def main(switcher, nursery, *, parent, **kwargs):
+async def main(switcher, nursery, *, parent, task_status, **kwargs):
     import trio
     from kivy.lang import Builder
     import kivy_tutorial.widgets.speechbubble
     from triohelper.triouser import activate_nursery
-    try:
-        with activate_nursery(nursery):
-            root = Builder.load_string(KV_CODE)
-        parent.add_widget(root)
-        await trio.sleep_forever()
-    finally:
-        parent.remove_widget(root)
+
+    with activate_nursery(nursery):
+        root = Builder.load_string(KV_CODE)
+    parent.add_widget(root)
+    task_status.started()
+    await trio.sleep_forever()

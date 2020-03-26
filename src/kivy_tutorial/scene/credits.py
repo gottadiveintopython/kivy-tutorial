@@ -3,7 +3,6 @@ KV_CODE = r'''
 #:import theme kivy_tutorial.theme
 
 BoxLayout:
-    opacity: 0
     orientation: 'vertical'
     padding: dp(10)
     spacing: dp(10)
@@ -46,24 +45,16 @@ BoxLayout:
             text: '戻る'
             on_release: root.switch_scene('menu')
 '''
-
-
-async def main(switcher, nursery, *, parent, appstate, **kwargs):
+async def main(
+        switcher, nursery, *, parent, appstate,
+        task_status, **kwargs):
     import trio
     from kivy.lang import Builder
     from triohelper.triouser import activate_nursery
-    from triohelper.kivy_awaitable import animate
 
-    try:
-        appstate.bgm = 'n75.ogg'
-        with activate_nursery(nursery):
-            root = Builder.load_string(KV_CODE)
-        root.switch_scene = lambda name: switcher.switch(name)
-        parent.add_widget(root)
-        await animate(root, opacity=1, d=.5)
-        await trio.sleep_forever()
-    finally:
-        with trio.move_on_after(1) as cleanup_scope:
-            cleanup_scope.shield = True
-            await animate(root, opacity=0, d=.5)
-            parent.remove_widget(root)
+    with activate_nursery(nursery):
+        root = Builder.load_string(KV_CODE)
+    root.switch_scene = lambda name: switcher.ask_to_switch(name)
+    parent.add_widget(root)
+    task_status.started()
+    await trio.sleep_forever()

@@ -28,28 +28,30 @@ async def main(*, nursery, parent):
         appstate = AppState()
         drawer = KTDrawer(
             appstate=appstate,
-            on_go_back=lambda __: switcher.switch('menu'),
+            on_go_back=lambda __: switcher.ask_to_switch('menu'),
         )
         bgmplayer = BgmPlayer(file_prefix='sound/')
         menu = KTMenu(
             source='menu.yaml',
-            on_leaf_node=lambda __, scene_name: switcher.switch(scene_name),
+            on_leaf_node=lambda __, scene_name: switcher.ask_to_switch(scene_name),
         )
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
         drawer.attach(root.ids.top_layer)
         update_bgm = partial(_update_bgm, bgmplayer=bgmplayer)
         appstate.bind(bgm=update_bgm, mute_bgm=update_bgm)
+        middle_layer = root.ids.middle_layer.__self__
         switcher = SceneSwitcher(
             pkgname='kivy_tutorial.scene',
             userdata={
-                'parent': root.ids.middle_layer,
+                'parent': middle_layer,
                 'appstate': appstate,
                 'drawer': drawer,
                 'menu': menu,
             },
         )
-        drawer.bind(on_go_home=lambda __: switcher.switch('title'))
+        await nursery.start(switcher.attach, middle_layer)
+        drawer.bind(on_go_home=lambda __: switcher.ask_to_switch('title'))
         nursery.start_soon(
             run_coro_under_trio,
             background_animation.play(
@@ -58,7 +60,7 @@ async def main(*, nursery, parent):
                 max_sprites=200,
             )
         )
-    switcher.switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
+    switcher.ask_to_switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
 
 def _update_bgm(appstate, __, *, bgmplayer):
