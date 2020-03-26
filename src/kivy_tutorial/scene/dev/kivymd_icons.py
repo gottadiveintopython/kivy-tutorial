@@ -1,32 +1,12 @@
-from pathlib import Path
-from kivy.config import Config
-Config.set('graphics', 'width', 1280)
-Config.set('graphics', 'height', 900)
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
 
-SRC_DIR = Path(__file__).parents[1] / 'src'
 
-
-def _modify_sys_path():
-    import sys
-    sys.path.append(str(SRC_DIR))
-_modify_sys_path()
-
-
-def _register_icon_font():
-    from kivy.core.text import LabelBase
-    LabelBase.register('Icon', str(SRC_DIR.joinpath(
-        'assets', 'font', 'materialdesignicons-webfont.ttf')))
-_register_icon_font()
-
-
-KV_CODE = '''
+Builder.load_string(r'''
 #:import md_icons kivymd.icon_definitions.md_icons
 
-<Row>:
+<KT_Debug_KivymdIconsRow>:
     Label:
         font_name: 'Icon'
         font_size: 50
@@ -37,8 +17,10 @@ KV_CODE = '''
         font_size: 30
         text: root.icon
 
-BoxLayout:
+<KT_Debug_KivymdIcons>:
     orientation: 'vertical'
+    spacing: 10
+    padding: 10
     BoxLayout:
         canvas.before:
             Color:
@@ -46,6 +28,7 @@ BoxLayout:
             Rectangle:
                 pos: self.pos
                 size: self.size
+        spacing: 10
         size_hint_y: None
         height: 50
         Label:
@@ -59,10 +42,10 @@ BoxLayout:
             id: ti
             font_size: 30
             multiline: False
-            on_text_validate: app.refresh()
+            on_text_validate: root.refresh()
     RecycleView:
         id: rv
-        viewclass: 'Row'
+        viewclass: 'KT_Debug_KivymdIconsRow'
         RecycleBoxLayout:
             orientation: 'vertical'
             padding: 5
@@ -71,23 +54,19 @@ BoxLayout:
             height: self.minimum_height
             default_size_hint: 1, None
             default_size: 100, 60
-'''
+''')
 
 
-class Row(BoxLayout):
+class KT_Debug_KivymdIconsRow(BoxLayout):
     icon = StringProperty()
     text = StringProperty()
 
 
-class ListingAllIconsApp(App):
-    def build(self):
-        return Builder.load_string(KV_CODE)
-    def on_start(self):
-        self.refresh()
+class KT_Debug_KivymdIcons(BoxLayout):
     def refresh(self):
         from kivymd.icon_definitions import md_icons
-        rv = self.root.ids.rv
-        ti = self.root.ids.ti
+        rv = self.ids.rv
+        ti = self.ids.ti
         if ti.text:
             rv.data = [
                 {'icon': key, } for key in md_icons.keys()
@@ -98,6 +77,13 @@ class ListingAllIconsApp(App):
                 {'icon': key, } for key in md_icons.keys()
             ]
 
+async def main(
+        switcher, nursery, *, parent, appstate,
+        task_status, **kwargs):
+    import trio
 
-if __name__ == '__main__':
-    ListingAllIconsApp().run()
+    root = KT_Debug_KivymdIcons()
+    root.refresh()
+    parent.add_widget(root)
+    task_status.started()
+    await trio.sleep_forever()

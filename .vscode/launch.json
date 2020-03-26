@@ -13,13 +13,6 @@
             "env": {"KIVY_EVENTLOOP": "trio"}
         },
         {
-            "name": "icons",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceRoot}/tools/listing_all_icons.py",
-            "console": "integratedTerminal"
-        },
-        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",

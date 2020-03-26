@@ -6,10 +6,11 @@
       B: B
       C: C
 使用素材: credits
-開発者用めにゅ〜:
+開発用めにゅ〜:
   てすとぉ:
     widget:
       基本的なwidget達: dev.widgets.basic
       吹き出し1: dev.widgets.speechbubble
       吹き出し2: dev.widgets.speechbubble2
+  icon一覧: dev.kivymd_icons
 titleへ戻る: title
