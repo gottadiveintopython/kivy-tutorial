@@ -18,3 +18,6 @@ icon_height = max(sp(30), 60)
 icon_size = (icon_width, icon_height, )
 
 drawer_background_color = rgba("#111111")
+
+code_font_size = max(sp(15), 20)
+code_font_name = 'Roboto'

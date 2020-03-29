@@ -8,6 +8,7 @@ from kivy.lang import Builder
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
 
+from kivy_tutorial import theme
 
 Builder.load_string(r'''
 <KTCodeLabel>:
@@ -26,8 +27,8 @@ class KTCodeLabel(Widget):
     minimum_width = NumericProperty()
     minimum_height = NumericProperty()
     minimum_size = ReferenceListProperty(minimum_width, minimum_height)
-    font_size = NumericProperty(Label.font_size.defaultvalue)
-    font_name = StringProperty(Label.font_name.defaultvalue)
+    font_size = NumericProperty(theme.code_font_size)
+    font_name = StringProperty(theme.code_font_name)
     lexer_name = StringProperty()
 
     def __init__(self, **kwargs):
