@@ -38,7 +38,6 @@ class KTSpeechBubble(Widget):
     padding_vertical] and a one argument form [padding].
     '''
 
-    content = ObjectProperty(None, allownone=True)
     background_color = ColorProperty("#FFFFFF")
     speaker_x = NumericProperty(None, allownone=True)
     speaker_y = NumericProperty(None, allownone=True)
