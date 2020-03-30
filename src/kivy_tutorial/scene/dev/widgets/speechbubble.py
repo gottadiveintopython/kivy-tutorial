@@ -1,46 +1,50 @@
-KV_CODE = '''
-<KTSpeechBubble2@KTSpeechBubble>
+from kivy.lang import Builder
+Builder.load_string(r'''
+<KT_Dev_SpeechBubble@KTSpeechBubble>
     background_color: 1, 1, 1, .3
     size_hint: .5, .5
     pos_hint: {'center': (.5, .5), }
+''')
+
+KV_CODE = '''
 GridLayout:
     cols: 3
     spacing: 20
     padding: 20
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.x
             speaker_y: self.parent.top
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.center_x
             speaker_y: self.parent.top
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.right
             speaker_y: self.parent.top
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.x
             speaker_y: self.parent.center_y
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.center_x
             speaker_y: self.parent.center_y
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.right
             speaker_y: self.parent.center_y
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.x
             speaker_y: self.parent.y
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.center_x
             speaker_y: self.parent.y
     FloatLayout:
-        KTSpeechBubble2:
+        KT_Dev_SpeechBubble:
             speaker_x: self.parent.right
             speaker_y: self.parent.y
 '''
