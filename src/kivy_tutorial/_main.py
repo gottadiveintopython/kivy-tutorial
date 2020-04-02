@@ -18,14 +18,13 @@ async def main(*, nursery, parent):
     from asynckivy.compatibility.trio import run_coro_under_trio
     from triohelper.triouser import activate_nursery
     from kivy_tutorial.sceneswitcher import SceneSwitcher
-    from kivy_tutorial.appstate import AppState
     from kivy_tutorial.bgmplayer import BgmPlayer
     from kivy_tutorial import background_animation
     from kivy_tutorial.widgets.drawer import KTDrawer
     from kivy_tutorial.widgets.menu import KTMenu
 
     with activate_nursery(nursery):
-        appstate = AppState()
+        appstate = _create_appstate()
         drawer = KTDrawer(
             appstate=appstate,
             on_go_back=lambda __: switcher.ask_to_switch('menu'),
@@ -68,3 +67,12 @@ def _update_bgm(appstate, __, *, bgmplayer):
         bgmplayer.stop()
     else:
         bgmplayer.play(appstate.bgm)
+
+
+def _create_appstate():
+    from kivy.event import EventDispatcher
+    from kivy.properties import StringProperty, BooleanProperty
+    class AppState(EventDispatcher):
+        bgm = StringProperty()
+        mute_bgm = BooleanProperty(False)
+    return AppState()
