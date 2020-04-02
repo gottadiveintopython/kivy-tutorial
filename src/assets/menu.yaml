@@ -12,5 +12,6 @@
     吹き出し1: dev.widgets.speechbubble
     吹き出し2: dev.widgets.speechbubble2
     KTCodeLabel: dev.widgets.codelabel
+    KTDialogue: dev.widgets.dialogue
   icon一覧: dev.kivymd_icons
 titleへ戻る: title
