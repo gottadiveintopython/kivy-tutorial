@@ -34,6 +34,7 @@ async def main(
     from asynckivy.uix.magnet import AKMagnet
     from triohelper.triouser import activate_nursery
 
+    appstate.bgm = 'n74.ogg'
     with activate_nursery(nursery):
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)

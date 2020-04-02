@@ -52,6 +52,7 @@ async def main(
     from kivy.lang import Builder
     from triohelper.triouser import activate_nursery
 
+    appstate.bgm = 'n75.ogg'
     with activate_nursery(nursery):
         root = Builder.load_string(KV_CODE)
     root.switch_scene = lambda name: switcher.ask_to_switch(name)

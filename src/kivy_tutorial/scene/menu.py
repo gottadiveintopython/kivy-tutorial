@@ -1,8 +1,10 @@
 async def main(
-        switcher, nursery, *, parent, drawer, menu,
+        switcher, nursery, *, parent, drawer, menu, appstate,
         task_status, **kwargs):
     import trio
     from kivy.uix.screenmanager import SlideTransition
+
+    appstate.bgm = 'n75.ogg'
     try:
         def on_go_back(drawer, *args, **kwargs):
             parent_node = menu.current_node.get('@parent', None)
