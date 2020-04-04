@@ -2,9 +2,7 @@
 本編:
   widget編:
     FloatLayout:
-      A: A
-      B: B
-      C: C
+      hintを使った配置: main.widgets.floatlayout.size_hint__pos_hint
 使用素材: credits
 開發用めにゅ〜:
   てすとぉ:
