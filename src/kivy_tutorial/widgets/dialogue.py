@@ -70,6 +70,7 @@ class KTDialogue(TrioUser, F.BoxLayout):
         import trio
         from kivy_tutorial.widgets.speechbubble2 import KTSpeechBubble2
         from triohelper.kivy_awaitable import animate, event
+        from triohelper import or_
         from triohelper import new_cancel_scope
         from asynckivy.uix.magnet import AKMagnet
 
@@ -124,11 +125,16 @@ class KTDialogue(TrioUser, F.BoxLayout):
 
         #
         indicator.icon = 'gesture-tap'
-        await event(
-            bubble, 'on_touch_down',
-            return_value=True,
-            filter=lambda w, t: (not t.is_mouse_scrolling) and \
-                w.collide_point(*t.opos),
+        await or_(
+            event(label, 'on_touch_down', return_value=True),
+            event(
+                bubble, 'on_touch_down',
+                return_value=True,
+                filter=lambda w, t: \
+                    (not t.is_mouse_scrolling) and \
+                    w.collide_point(*t.opos) and \
+                    not sview.collide_point(*bubble.to_local(*t.opos)),
+            ),
         )
         new_nursery.cancel_scope.cancel()
 
