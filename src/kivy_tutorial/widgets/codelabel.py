@@ -65,7 +65,3 @@ _restore_special_chars = str.maketrans({
     '\x01': '[',
     '\x02': ']',
 })
-
-
-def _get_text_color_from_background_color(bg_color):
-    return (1, 1, 1, 1) if sum(bg_color[:3]) < 1.5 else (0, 0, 0, 1)
