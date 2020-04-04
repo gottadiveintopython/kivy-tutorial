@@ -51,7 +51,20 @@ class KTCodeLabel(Widget):
     def _update_text(self, *args):
         from pygments import highlight
         self.ids.label.text = highlight(
-            self.text, self._lexer, self._formatter)
+            self.text.translate(_replace_special_chars),
+            self._lexer,
+            self._formatter,
+        ).translate(_restore_special_chars)
+
+
+_replace_special_chars = str.maketrans({
+    '[': '\x01',
+    ']': '\x02',
+})
+_restore_special_chars = str.maketrans({
+    '\x01': '[',
+    '\x02': ']',
+})
 
 
 def _get_text_color_from_background_color(bg_color):
