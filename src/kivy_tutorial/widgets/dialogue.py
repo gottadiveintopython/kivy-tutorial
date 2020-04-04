@@ -15,7 +15,7 @@ Builder.load_string(r'''
         KTIcon:
             id: indicator
             opacity: 0
-            color: 0, .3, 0, .5
+            color: 1, 1, 1, 1
             size_hint: None, None
             size: self.texture_size
             pos_hint: {'right': .998, 'y': .005, }
@@ -37,7 +37,6 @@ Builder.load_string(r'''
         canvas.after:
             PopMatrix:
 <KTDialogueLabel@KTLabel>:
-    color: 0, 0, 0, 1
     text_size: self.width, None
     size_hint_y: None
     height: self.texture_size[1]
@@ -69,7 +68,7 @@ class KTDialogue(TrioUser, F.BoxLayout):
     @new_nursery
     async def speak(self, text, *, markup=False, new_nursery):
         import trio
-        from kivy_tutorial.widgets.speechbubble import KTSpeechBubble
+        from kivy_tutorial.widgets.speechbubble2 import KTSpeechBubble2
         from triohelper.kivy_awaitable import animate, event
         from triohelper import new_cancel_scope
         from asynckivy.uix.magnet import AKMagnet
@@ -82,15 +81,8 @@ class KTDialogue(TrioUser, F.BoxLayout):
         where_speech_bubble_goes = self.ids.where_speech_bubble_goes
         magnet = AKMagnet(
             size=(0, 0), x=speaker.x, y=speaker.center_y, duration=.3)
-        bubble = KTSpeechBubble(
-            speaker_x=speaker.x,
-            speaker_y=speaker.center_y,
-        )
+        bubble = KTSpeechBubble2(border_color="#777777")
         self._bubble = bubble
-        speaker.bind(
-            x=bubble.setter('speaker_x'),
-            center_y=bubble.setter('speaker_y'),
-        )
         magnet.add_widget(bubble)
         magnet.pos_hint = {'center_x': .5, 'center_y': .5, }
         self.ids.where_speech_bubble_goes.add_widget(magnet, index=1)
