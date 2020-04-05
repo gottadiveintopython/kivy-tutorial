@@ -41,16 +41,6 @@ BoxLayout:
             padding: dp(10)
 '''
 
-def add_border(widget):
-    from kivy.graphics import Line, Color
-    with widget.canvas.after:
-        Color([1, 1, 1, 1])
-        line = Line(dash_length=4, dash_offset=8)
-    def update_inst(w, *args):
-        line.rectangle = [*w.pos, *w.size, ]
-    widget.bind(pos=update_inst, size=update_inst)
-    update_inst(widget)
-
 
 async def main(
         switcher, nursery, *, parent, appstate, drawer, menu,
