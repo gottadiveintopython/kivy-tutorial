@@ -39,7 +39,14 @@ BoxLayout:
             text: 'いらすとや'
             on_release: webbrowser.open(r'https://www.irasutoya.com/')
         Widget:
-    Widget:
+    BoxLayout:
+        Widget:
+        KTTightLabel:
+            text: 'Font ...'
+        KTLabelButton:
+            text: 'Asterism'
+            on_release: webbrowser.open(r'https://www.asterism-m.com/')
+        Widget:
     AnchorLayout:
         KTTightButton:
             text: '戻る'
