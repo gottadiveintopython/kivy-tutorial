@@ -28,7 +28,7 @@ BoxLayout:
                     id: code
                     size_hint: None, None
                     size: self.minimum_size
-                    lexer_name: 'yaml'
+                    lexer_name: 'kivy'
     Splitter:
         sizable_from: 'top'
         max_size: self.parent.height

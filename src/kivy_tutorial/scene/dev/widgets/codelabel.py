@@ -11,7 +11,7 @@ async def main(switcher, nursery, *, parent, task_status, **kwargs):
     )
     label = KTCodeLabel(
         text=KV_CODE,
-        lexer_name='yaml',
+        lexer_name='kivy',
         size_hint_y=None,
     )
     label.bind(minimum_height=label.setter('height'))

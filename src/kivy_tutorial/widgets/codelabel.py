@@ -42,10 +42,9 @@ class KTCodeLabel(Widget):
         self._trigger_update_text()
 
     def on_lexer_name(self, __, name):
-        from kivy.extras.highlight import KivyLexer
         from pygments.lexers import get_lexer_by_name
-        self._lexer = KivyLexer() if name.lower() == 'kivy' \
-            else get_lexer_by_name(name)
+        self._lexer = get_lexer_by_name(
+            'yaml' if name.lower() == 'kivy' else name)
         self._trigger_update_text()
 
     def _update_text(self, *args):
