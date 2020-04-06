@@ -2,7 +2,8 @@
 本編:
   Layout編:
     基礎編:
-      FloatLayoutでhintを使った配置: main.layout.basis.01_floatlayout_hint
+      はじめに: main.layout.basis.00_introduction
+      FloatLayoutにおけるhintを使った配置: main.layout.basis.01_floatlayout_hint
       複合property: main.layout.basis.02_compound_property
 使用素材: credits
 開發用めにゅ〜:
