@@ -93,8 +93,8 @@ async def main(
             '''))
         preview.add_widget(tree)
     for line in (
-        r'破線で囲まれている部分が{FloatLayout}だよ。',
-        r'あくまで見やすくする為に破線を引いたのであって{FloatLayout}に元々はそんな物は無いから注意してね。',
+        r'いま破線で囲まれている部分に{FloatLayout}があるよ。',
+        r'あくまで見やすくする為に破線を引いたのであって{FloatLayout}に元々そんな物は無いから注意してね。',
         r'それじゃあここに{Button}を加えてみるよ。',
     ):
         await speak(line)
@@ -111,8 +111,8 @@ async def main(
         magnet.add_widget(Factory.Button(text='Button'))
     await trio.sleep(.5)
     for line in (
-        r'{Button}が{FloatLayout}と同じ大きさなのが見て取れるね。',
-        r'これは{Button}の{size_hint}が既定で{code}(1, 1){end}になっているからだよ。',
+        r'{Button}が{FloatLayout}と同じ大きさなのが見てとれるね。',
+        r'これは{Button}の{size_hint}が既定で{code}1, 1{end}になっているからだよ。',
         r'つまりはこういう事。'
     ):
         await speak(line)
@@ -125,7 +125,7 @@ async def main(
                     size_hint: 1, 1
             ''')
     await trio.sleep(.5)
-    await speak(r'試しに{size_hint}を{code}(0.5, 1){end}に変えると')
+    await speak(r'試しに{size_hint}を{code}0.5, 1{end}に変えると')
 
     async with fade_transition(code):
         code.text = dedent(r'''
@@ -136,7 +136,7 @@ async def main(
             ''')
     magnet.size_hint_x = .5
     for line in (
-        r'見ての通り{Button}の幅は{FloatLayout}の半分(0.5)になるよ。',
+        r'{Button}の幅は{FloatLayout}の半分({code}0.5{end})になるよ。',
         r'{Button}の高さを{FloatLayout}の半分にしたい時も要領は同じだよ。',
     ):
         await speak(line)
@@ -222,11 +222,12 @@ async def main(
     await trio.sleep(.5)
     for line in (
         r'{size_hint}と比べて複雑だけど要するに',
-        r'辞書の鍵として{Button}側の位置を、値として{FloatLayout}側の位置を指定しているよ。',
-        "{Button}側のx座標の位置は\n{code}x 左端\ncenter_x 中央\nright 右端{end}\n",
-        "{Button}側のy座標の位置は\n{code}y 下端\ncenter_y 中央\ntop 上端{end}\n",
-        r"{FloatLayout}側は{code}0{end}が左端/下端、{code}1{end}が右端/上端だね。",
-        r"この数値は0以下でも1以上でも構わないよ。",
+        '辞書の鍵として{Button}側の位置を、値として{FloatLayout}側の位置を指定する事で\n'
+        r'{Button}側の指定した位置が{FloatLayout}側の指定した位置に揃えられるんだ。',
+        "この時使える{Button}側のx座標の位置指定は\n{code}x (左端)\ncenter_x (中央)\nright (右端){end}\nの三つ、",
+        "y座標の位置指定は\n{code}y (下端)\ncenter_y (中央)\ntop (上端){end}\n三つだよ。",
+        r"また{FloatLayout}側は任意の数値が使えて{code}0{end}が左端/下端、{code}1{end}が右端/上端になっているよ。",
+        r"この数値は0以下でも1以上でも構わないからね。",
         r".",
         "これでhintを使ったやり方は終わり。\n次回はhintを使わないやり方を見ていくよ、byebye。",
     ):
