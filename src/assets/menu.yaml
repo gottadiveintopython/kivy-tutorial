@@ -1,8 +1,8 @@
 自己紹介: aboutme
 本編:
-  widget編:
-    FloatLayout:
-      hintを使った配置: main.widgets.floatlayout.size_hint__pos_hint
+  Layout編:
+    基礎編:
+      FloatLayoutでhintを使った配置: main.layout.basis.01_floatlayout_hint
 使用素材: credits
 開發用めにゅ〜:
   てすとぉ:
