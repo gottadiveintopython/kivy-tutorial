@@ -5,6 +5,7 @@
       はじめに: main.layout.basis.00_introduction
       FloatLayoutにおけるhintを使った配置: main.layout.basis.01_floatlayout_hint
       複合property: main.layout.basis.02_compound_property
+      FloatLayoutにおけるhintを使わない配置: main.layout.basis.03_floatlayout_no_hint
 使用素材: credits
 開發用めにゅ〜:
   てすとぉ:
