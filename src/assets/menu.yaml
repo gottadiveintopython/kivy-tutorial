@@ -1,11 +1,10 @@
 自己紹介: aboutme
 本編:
-  Layout編:
-    基礎編:
-      はじめに: main.widget.layout_basis.00_introduction
-      FloatLayoutにおけるhintを使った配置: main.widget.layout_basis.01_floatlayout_hint
-      複合property: main.widget.layout_basis.02_compound_property
-      FloatLayoutにおけるhintを使わない配置: main.widget.layout_basis.03_floatlayout_no_hint
+  Layout基礎編:
+    はじめに: main.widget.layout_basis.00_introduction
+    hint系propertyを使った配置: main.widget.layout_basis.01_floatlayout_hint
+    ReferenceListProperty: main.widget.layout_basis.02_compound_property
+    hint系propertyを使わない配置: main.widget.layout_basis.03_floatlayout_no_hint
 使用素材: credits
 開發用めにゅ〜:
   てすとぉ:
