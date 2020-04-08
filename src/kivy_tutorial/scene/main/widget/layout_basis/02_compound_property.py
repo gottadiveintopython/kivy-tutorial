@@ -153,7 +153,13 @@ async def main(
                     center_y: 50
             ''')
     await trio.sleep(.5)
-    await speak(r'そして{pos_hint}にも同じ事が言えるよ。')
+    for line in (
+        r'この{size},{pos},{center}のように複数のpropertyを{list}の形でまとめて'
+        r'扱えるようにしたpropertyは{ReferenceListProperty}といって、他にもKivy'
+        r'の至る所に出てくるよ。',
+        r'また{pos_hint}の指定も似たような感じでまとめられるよ。',
+    ):
+        await speak(line)
 
     async with fade_transition(left_code, right_code):
         left_code.text = dedent('''
@@ -202,7 +208,7 @@ _format_kwargs = {
     key: rf"[color=BBBB00]{key}[/color]"
     for key in (
         'size_hint', 'pos_hint', 'list', 'pos',
-        'size', 'width', 'height', 'center',
+        'size', 'width', 'height', 'center', 'ReferenceListProperty',
     )
 }
 

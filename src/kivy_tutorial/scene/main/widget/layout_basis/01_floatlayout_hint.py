@@ -225,7 +225,7 @@ async def main(
         '辞書の鍵として{Button}側の位置を、値として{FloatLayout}側の位置を指定する事で\n'
         r'{Button}側の指定した位置が{FloatLayout}側の指定した位置に揃えられるんだ。',
         "この時使える{Button}側のx座標の位置指定は\n{code}x (左端)\ncenter_x (中央)\nright (右端){end}\nの三つ、",
-        "y座標の位置指定は\n{code}y (下端)\ncenter_y (中央)\ntop (上端){end}\n三つだよ。",
+        "y座標の位置指定も\n{code}y (下端)\ncenter_y (中央)\ntop (上端){end}\nの三つだよ。",
         r"また{FloatLayout}側は任意の数値が使えて{code}0{end}が左端/下端、{code}1{end}が右端/上端になっているよ。",
         r"この数値は0以下でも1以上でも構わないからね。",
         r".",

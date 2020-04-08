@@ -104,7 +104,7 @@ async def main(
         tree.do_layout()
         magnet.add_widget(Factory.Button(text='Button'))
     for line in (
-        r'ここで{FloatLayout}を{BoxLayout}に置き換えると',
+        r'ここで{FloatLayout}を{BoxLayout}に置き換えてみると',
     ):
         await speak(line)
 
@@ -133,7 +133,8 @@ async def main(
     preview.do_layout()
     tree.add_widget(magnet)
     for line in (
-        r'{Button}の幅がどう見ても親の半分({code}.5{end})ではなくなっちゃったね。',
+        r'こうなるんだ。',
+        r'{Button}の幅がどう見ても親の半分({code}.5{end})ではないよね。',
         r'実は[color=FF6666]hint系propertyがどのような作用をするかは直接の親がなんであるか'
         r'によって変わるんだ[/color]。',
         r'だから各widgetごとに子のhint系propertyをどのように扱うのかを知る必要があるって事。',

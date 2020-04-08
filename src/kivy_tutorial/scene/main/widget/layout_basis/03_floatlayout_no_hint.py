@@ -97,8 +97,8 @@ async def main(
             '''))
         preview.add_widget(tree)
     for line in (
-        r'以前にも使った境界線付きの{FloatLayout}だよ。',
-        r'以前はここで{size_hint}を使って大きさを指定していたんだったね。',
+        r'前々回に使った境界線付きの{FloatLayout}だよ。',
+        r'その時はここで{size_hint}を使って大きさを指定していたんだったね。',
         r'今回はそれに代えて{size}を使うよ。',
         r'{size_hint}が割合による指定だったのに対し{size}ではpixel数を指定するよ。',
         r'それじゃあとりあえず幅が200pixelで高さが100pixelの{Button}を作ってみるね。',
