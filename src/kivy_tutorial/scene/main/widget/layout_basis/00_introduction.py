@@ -1,5 +1,3 @@
-from contextlib import asynccontextmanager
-
 KV_CODE = r'''
 KTDialogue:
     id: dialogue

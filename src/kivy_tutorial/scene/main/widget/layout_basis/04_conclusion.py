@@ -1,5 +1,3 @@
-from contextlib import asynccontextmanager
-
 KV_CODE = r'''
 BoxLayout:
     orientation: 'vertical'
@@ -54,6 +52,7 @@ async def main(
     import kivy_tutorial.widgets.basic
     import kivy_tutorial.widgets.codelabel
     import kivy_tutorial.widgets.dialogue
+    from kivy_tutorial.utils import fade_transition
 
     appstate.bgm = ''
 
@@ -163,21 +162,3 @@ _format_kwargs = {
         )
     }
 }
-
-
-@asynccontextmanager
-async def fade_transition(*widgets):
-    from triohelper.kivy_awaitable import animate
-    first_one = widgets[0]
-    bind_uids = [
-        first_one.fbind('opacity', w.setter('opacity'))
-        for w in widgets[1:]
-    ]
-    try:
-        await animate(first_one, opacity=0, d=.4)
-        yield
-        await animate(first_one, opacity=1, d=.4)
-    finally:
-        first_one.opacity = 1
-        for uid in bind_uids:
-            first_one.unbind_uid('opacity', uid)
