@@ -61,9 +61,9 @@ class BgmPlayer(TrioUser):
         from kivy.core.audio import SoundLoader
         bgms = self._bgms
         while True:
+            await trio.sleep(polling_interval)
             next_file = self._next_file
             current_bgm = self._current_bgm
-            await trio.sleep(polling_interval)
             if next_file is None:
                 continue
             elif not next_file:
