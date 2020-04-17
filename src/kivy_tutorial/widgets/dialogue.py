@@ -114,29 +114,32 @@ class KTDialogue(TrioUser, F.BoxLayout):
         # 指示iconが点滅するanimationを開始
         new_nursery.start_soon(self._blink_indicator)
 
-        # scrollが要る場合は一番下までscrollされるまで 'pan-vertical'-icon
+        # scrollできる時はiconを'pan-vertical'に、できない時は'gesture-tap'に
         indicator = self.ids.indicator
-        if sview.height < label.height:
-            indicator.icon = 'pan-vertical'
-            await event(
-                sview, 'scroll_y',
-                filter=lambda sview, scroll_y: scroll_y <= 0
-            )
+        def update_indicator(*args):
+            indicator.icon = 'pan-vertical' if \
+                (sview.height < label.height) else 'gesture-tap'
+        sview.bind(height=update_indicator)
+        label.bind(height=update_indicator)
+        update_indicator()
 
         #
-        indicator.icon = 'gesture-tap'
-        await or_(
-            event(label, 'on_touch_down', return_value=True),
-            event(
-                bubble, 'on_touch_down',
-                return_value=True,
-                filter=lambda w, t: \
-                    (not t.is_mouse_scrolling) and \
-                    w.collide_point(*t.opos) and \
-                    not sview.collide_point(*bubble.to_local(*t.opos)),
-            ),
-        )
-        new_nursery.cancel_scope.cancel()
+        try:
+            await or_(
+                event(label, 'on_touch_down', return_value=True),
+                event(
+                    bubble, 'on_touch_down',
+                    return_value=True,
+                    filter=lambda w, t: \
+                        (not t.is_mouse_scrolling) and \
+                        w.collide_point(*t.opos) and \
+                        not sview.collide_point(*bubble.to_local(*t.opos)),
+                ),
+            )
+        finally:
+            new_nursery.cancel_scope.cancel()
+            sview.unbind(height=update_indicator)
+            label.unbind(height=update_indicator)
 
     async def _blink_indicator(self):
         from triohelper.kivy_awaitable import animate
