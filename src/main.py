@@ -28,6 +28,13 @@ def _register_fonts():
 _register_fonts()
 
 
+def _increase_scroll_timeout_on_desktop():
+    import kivy.utils
+    if kivy.utils.platform in ('linux', 'win', 'macosx', ):
+        Config.set('widgets', 'scroll_timeout', 400)
+_increase_scroll_timeout_on_desktop()
+
+
 class TutorialApp(App):
     def build(self):
         from kivy.uix.floatlayout import FloatLayout
