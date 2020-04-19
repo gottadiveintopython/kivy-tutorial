@@ -77,7 +77,7 @@ async def main(
 def _create_menu():
     from kivy.factory import Factory as F
     root = F.BoxLayout()
-    def on_release(button):
+    def on_release_anim(button):
         import webbrowser
         webbrowser.open(button.url)
     for icon, url in (
@@ -89,7 +89,7 @@ def _create_menu():
         ('email', 'mailto:flow4re2c@gmail.com'),
     ):
         case = F.AnchorLayout()
-        button = F.KTIconButton(icon=icon, on_release=on_release)
+        button = F.KTIconButton(icon=icon, on_release_anim=on_release_anim)
         button.url = url
         case.add_widget(button)
         root.add_widget(case)
