@@ -50,7 +50,7 @@ BoxLayout:
     AnchorLayout:
         KTTightButton:
             text: '戻る'
-            on_release: root.switch_scene('menu')
+            on_release_anim: root.switch_scene('menu')
 '''
 async def main(
         switcher, nursery, *, parent, appstate,
