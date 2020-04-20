@@ -70,7 +70,7 @@ async def main(
         return await dialogue.speak(_finalize_text(text), markup=True)
 
     for line in (
-        r'{Splitter}ちょっと面白いwidgetだよ。',
+        r'{Splitter}はちょっと面白いwidgetだよ。',
         r'だってsplitが"割る"や"裂く"のような意味なのにその意味に沿った働きをしていないからね。',
         r'それじゃあ一体何をするwidgetなのか、これから見ていくよ。',
     ):
@@ -219,7 +219,7 @@ async def main(
         r'.',
         r'最後にまとめると',
         '1. {Splitter}自体は何も裂かない。\n'
-        '2. ただ子を伸縮可能にしているだけ。\n'
+        '2. ただ子をdrag操作で伸縮可能にしているだけ。\n'
         '3. でも{BoxLayout}と組み合わせることで裂いているかの様に見せかけられる。',
         r'って事。',
         r'それじゃあこれで終わるね。',
