@@ -9,6 +9,7 @@
   Labelの肝: main.widget.label.core_concept
   BoxLayout: main.widget.boxlayout
   Splitter: main.widget.splitter
+  ScrollView: main.widget.scrollview
 使用素材: credits
 開發用めにゅ〜:
   てすとぉ:
