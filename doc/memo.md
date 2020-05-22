@@ -41,3 +41,20 @@ ShaderTransitionによる切り替え中は後ろにあるwidgetが表示され�
 # Kivyに依存していない状態のSceneSwitcher
 
 - b8147356f6cdbc1be0027b5441c4f3774879646f
+
+# hint系property vs 非hint系property
+
+### hint系の長所
+
+- propertyのbindingに頼る必要がない
+- propertyの評価順序に起因する配置の崩れが起こらない
+
+### hint系を使うべきではない所
+
+- 親の大きさとは関係なく大きさを決めたい場合
+  - textureと同じ大きさに合わせる
+    - `Image`, `Label`
+
+### hint系が使えない所
+
+- canvas

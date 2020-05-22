@@ -59,7 +59,9 @@ async def main(*, nursery, parent):
                 max_sprites=200,
             )
         )
-    switcher.ask_to_switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
+    switcher.ask_to_switch('main.widget.way_to_put_many_widgets.02_recycleview')
+    # switcher.ask_to_switch('main.widget.way_to_put_many_widgets.01_simplest_way')
+    # switcher.ask_to_switch(os.environ.get('KIVY_TUTORIAL_FIRST_SCENE', 'title'))
 
 
 def _update_bgm(appstate, __, *, bgmplayer):

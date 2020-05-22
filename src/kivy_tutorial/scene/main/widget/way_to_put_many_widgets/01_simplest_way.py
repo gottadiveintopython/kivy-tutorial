@@ -150,7 +150,7 @@ async def main(
     for line in (
         r'無理やり詰め込んだせいか{Button}同士がくっついちゃってるね。',
         r'確か{BoxLayout}の子の{size_hint}が初期値のままだとこんな風に'
-        r'{BoxLayout}に収まる様に縮められるんだったね。',
+        r'{BoxLayout}に収まる様に押し縮められるんだったね。',
         r'このままだと使いづらいから{Button}の{size_hint_y}と{height}を書き換えて'
         r'常に一定の高さにしてあげるね。',
     ):
