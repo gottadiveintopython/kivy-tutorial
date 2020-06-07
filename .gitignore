@@ -6,3 +6,4 @@ bin/
 .pytest_cache/
 *.mp3
 /temp
+/Pipfile.lock
