@@ -8,7 +8,7 @@ Builder.load_string(r'''
 
 <KT_Debug_KivymdIconsRow>:
     Label:
-        font_name: 'Icon'
+        font_name: 'Icons'
         font_size: 50
         text: md_icons.get(root.icon, '')
         size_hint_x: None
@@ -32,7 +32,7 @@ Builder.load_string(r'''
         size_hint_y: None
         height: 50
         Label:
-            font_name: 'Icon'
+            font_name: 'Icons'
             text: md_icons['folder-search']
             color: 0, 0, 0, 1
             font_size: 40

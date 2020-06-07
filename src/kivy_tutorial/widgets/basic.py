@@ -34,7 +34,7 @@ KV_CODE = '''
 
 <KTIcon>:
     font_size: theme.label_font_size
-    font_name: 'Icon'
+    font_name: 'Icons'
     size: theme.icon_size
     text: md_icons.get(self.icon, '')
 
@@ -68,7 +68,7 @@ KV_CODE = '''
     height: self.texture_size[1] + dp(10)
 
 <KTIconButton>:
-    font_name: 'Icon'
+    font_name: 'Icons'
     text: md_icons.get(self.icon, '')
     font_size: theme.icon_font_size
     size_hint: None, None

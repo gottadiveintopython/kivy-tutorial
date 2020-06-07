@@ -26,6 +26,7 @@ async def main(*, nursery, parent):
     with activate_nursery(nursery):
         appstate = _create_appstate()
         drawer = KTDrawer(
+            anchor='rm',
             appstate=appstate,
             on_go_back=lambda __: switcher.ask_to_switch('menu'),
         )
@@ -36,7 +37,7 @@ async def main(*, nursery, parent):
         )
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
-        drawer.attach(root.ids.top_layer)
+        root.ids.top_layer.add_widget(drawer)
         update_bgm = partial(_update_bgm, bgmplayer=bgmplayer)
         appstate.bind(bgm=update_bgm, mute_bgm=update_bgm)
         middle_layer = root.ids.middle_layer.__self__

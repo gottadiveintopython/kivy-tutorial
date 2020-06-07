@@ -72,7 +72,7 @@ class KTDialogue(TrioUser, F.BoxLayout):
         from triohelper.kivy_awaitable import animate, event
         from triohelper import or_
         from triohelper import new_cancel_scope
-        from asynckivy.uix.magnet import AKMagnet
+        from kivyx.uix.magnet import KXMagnet
 
         self.shutup()
         self._child_nursery = new_nursery
@@ -80,7 +80,7 @@ class KTDialogue(TrioUser, F.BoxLayout):
         # 吹き出しが現れるanimationを開始
         speaker = self.ids.speaker
         where_speech_bubble_goes = self.ids.where_speech_bubble_goes
-        magnet = AKMagnet(
+        magnet = KXMagnet(
             size=(0, 0), x=speaker.x, y=speaker.center_y, duration=.3)
         bubble = KTSpeechBubble2(border_color="#777777")
         self._bubble = bubble

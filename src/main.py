@@ -23,7 +23,7 @@ _add_resource_search_path()
 
 def _register_fonts():
     from kivy.core.text import LabelBase
-    LabelBase.register('Icon', 'font/materialdesignicons-webfont.ttf')
+    LabelBase.register('Icons', 'font/materialdesignicons-webfont.ttf')
     LabelBase.register('yomogi', 'font/yomogifont.otf')
 _register_fonts()
 

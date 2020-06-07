@@ -31,7 +31,7 @@ async def main(
     from kivy.factory import Factory as F
     from kivy.resources import resource_find
     import asynckivy as ak
-    from asynckivy.uix.magnet import AKMagnet
+    from kivyx.uix.magnet import KXMagnet
     from triohelper.triouser import activate_nursery
 
     appstate.bgm = 'n74.ogg'
@@ -39,7 +39,7 @@ async def main(
         root = Builder.load_string(KV_CODE)
         parent.add_widget(root)
         await trio.sleep(.1)
-        antelope = AKMagnet(
+        antelope = KXMagnet(
             size=parent.size,
             pos=parent.pos,
             pos_hint={'x': 0, 'y': 0, },
@@ -61,7 +61,7 @@ async def main(
     ak.start(ak.animate(desc, d=2, opacity=1))
 
     where_menu_goes = root.ids.where_menu_goes
-    menu = AKMagnet(
+    menu = KXMagnet(
         x=where_menu_goes.x,
         top=where_menu_goes.y,
         size=where_menu_goes.size,

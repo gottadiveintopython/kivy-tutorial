@@ -48,7 +48,7 @@ async def main(
     from kivy.lang import Builder
     from kivy.factory import Factory
     from triohelper.triouser import activate_nursery
-    # from asynckivy.uix.magnet import AKMagnet
+    # from kivyx.uix.magnet import KXMagnet
     import kivy_tutorial.widgets.basic
     import kivy_tutorial.widgets.codelabel
     import kivy_tutorial.widgets.dialogue

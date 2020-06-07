@@ -49,7 +49,7 @@ async def main(
     from kivy.uix.button import Button
     from kivy.uix.scrollview import ScrollView
     from triohelper.triouser import activate_nursery
-    from asynckivy.uix.magnet import AKMagnet
+    from kivyx.uix.magnet import KXMagnet
     import kivy_tutorial.widgets.basic
     import kivy_tutorial.widgets.codelabel
     import kivy_tutorial.widgets.dialogue
@@ -124,7 +124,7 @@ async def main(
                         text: 'C'  #
             ''')
     for text in 'ABC':
-        magnet = AKMagnet(duration=.4)
+        magnet = KXMagnet(duration=.4)
         magnet.add_widget(Button(text=text))
         boxlayout.add_widget(magnet)
         await trio.sleep(magnet.duration + .2)
@@ -142,7 +142,7 @@ async def main(
                 boxlayout.add_widget(Button(text=text))
             ''')
     for text in 'DEFGHIJKLMNOPQ':
-        magnet = AKMagnet(duration=.4)
+        magnet = KXMagnet(duration=.4)
         magnet.add_widget(Button(text=text))
         boxlayout.add_widget(magnet)
         await trio.sleep(magnet.duration)

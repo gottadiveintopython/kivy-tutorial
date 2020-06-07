@@ -49,7 +49,7 @@ async def main(
     from kivy.lang import Builder
     from kivy.factory import Factory
     from triohelper.triouser import activate_nursery
-    from asynckivy.uix.magnet import AKMagnet
+    from kivyx.uix.magnet import KXMagnet
     from kivy_tutorial.widgets.basic import KTLabel
     import kivy_tutorial.widgets.codelabel
     import kivy_tutorial.widgets.dialogue
@@ -109,7 +109,7 @@ async def main(
                     Button:  #
                         text: 'A'  #
             ''')
-    magnet_a = AKMagnet(duration=.4)
+    magnet_a = KXMagnet(duration=.4)
     button_a = Factory.Button(text='A')
     magnet_a.add_widget(button_a)
     layout.add_widget(magnet_a)
@@ -126,7 +126,7 @@ async def main(
                     Button:  #
                         text: 'B'  #
             ''')
-    magnet_b = AKMagnet(duration=.4)
+    magnet_b = KXMagnet(duration=.4)
     button_b = Factory.Button(text='B')
     magnet_b.add_widget(button_b)
     layout.add_widget(magnet_b)
@@ -145,7 +145,7 @@ async def main(
                     Button:  #
                         text: 'C'  #
             ''')
-    magnet_c = AKMagnet(duration=.4)
+    magnet_c = KXMagnet(duration=.4)
     button_c = Factory.Button(text='C')
     magnet_c.add_widget(button_c)
     layout.add_widget(magnet_c)

@@ -48,7 +48,7 @@ async def main(
     from kivy.lang import Builder
     from kivy.factory import Factory
     from triohelper.triouser import activate_nursery
-    from asynckivy.uix.magnet import AKMagnet
+    from kivyx.uix.magnet import KXMagnet
     import kivy_tutorial.widgets.basic
     import kivy_tutorial.widgets.codelabel
     import kivy_tutorial.widgets.dialogue
@@ -89,7 +89,7 @@ async def main(
             ''')
         tree = Builder.load_string(dedent('''
             FloatLayout:
-                AKMagnet:
+                KXMagnet:
                     id: magnet
                     duration: .4
                     pos_hint: {'center_x': .5, 'center_y': .5, }

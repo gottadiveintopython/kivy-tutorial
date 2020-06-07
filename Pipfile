@@ -4,16 +4,17 @@ name = "pypi"
 verify_ssl = true
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
 
 [packages]
-cython = "==0.29.9"
+cython = "==0.29.14"
 trio = "*"
 pillow = "*"
 kivy = {git = "git://github.com/kivy/kivy.git",ref = "master"}
-asynckivy = {editable = true,path = "./../asynckivy"}
+asynckivy = "*"
 pyyaml = "*"
 pygments = "*"
+kivyx = {editable = true,path = "./../kivyx"}
 
 [dev-packages]
 pytest-trio = "*"
