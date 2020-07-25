@@ -3,6 +3,7 @@ __all__ = ('KTDialogue', )
 from kivy.properties import StringProperty, ObjectProperty, NumericProperty
 from kivy.lang import Builder
 from kivy.factory import Factory as F
+from kivyx.utils import save_widget_location, restore_widget_location
 from triohelper.triouser import TrioUser
 from triohelper import new_nursery
 import kivy_tutorial.widgets.basic
@@ -93,8 +94,11 @@ class KTDialogue(TrioUser, F.BoxLayout):
 
         # 吹き出しが現れるanimationの完了を待つ
         await trio.sleep(magnet.duration + .1)
-        magnet.disappear()
+        location = save_widget_location(magnet)
+        magnet.parent.remove_widget(magnet)
         del magnet
+        restore_widget_location(bubble, location)
+        del location
 
         if self._sound is not None:
             self._sound.play()
