@@ -1,83 +1,40 @@
 __all__ = ('BgmPlayer', )
 
-import trio
-from triohelper import animate
-from triohelper.triouser import TrioUser
+from kivy.core.audio import SoundLoader
+from kivyx.core.audio import Bgm
 
 
-class Bgm:
-    '''kivy.core.audio.Soundを
-    
-    - 再生する時は音量を徐々に上げ
-    - 停止する時は音量を徐々に下げ
-    - 再生の際は前回停止した位置から始める
-    '''
-    def __init__(self, sound):
-        self.sound = sound
-        self._pos = 0
-        sound.loop = True
+class BgmPlayer:
 
-    @property
-    def pos(self):
-        sound = self.sound
-        return self._pos if sound.state == 'stop' else sound.get_pos()
-
-    async def stop(self):
-        sound = self.sound
-        if sound.state == 'stop':
-            return
-        await animate(sound, volume=0, step=.05)
-        self._pos = sound.get_pos()
-        sound.stop()
-        await trio.sleep(.1)
-
-    async def play(self):
-        sound = self.sound
-        if sound.state == 'play':
-            return
-        sound.volume = 0
-        sound.play()
-        await trio.sleep(.1)  # play()のあと直ちにseek()はできないのでsleep()を挟む
-        sound.seek(self._pos)
-        await animate(sound, volume=.5, step=.05)
-
-
-class BgmPlayer(TrioUser):
-
-    def __init__(self, *, file_prefix, polling_interval=1, **kwargs):
-        super().__init__(**kwargs)
-        self._next_file = None
+    def __init__(self, *, file_prefix):
+        self._file_prefix = file_prefix
         self._bgms = {}
         self._current_bgm = None
-        self.nursery.start_soon(self._keep_polling, polling_interval, file_prefix)
+        self._current_filename = None
+
+    def _get_bgm(self, filename):
+        bgms = self._bgms
+        if filename not in bgms:
+            bgms[filename] = Bgm(
+                SoundLoader.load(f"{self._file_prefix}{filename}"),
+                fade_in_duration=2.,
+                fade_out_duration=1.,
+                # max_volume=.5,
+                )
+        return bgms[filename]
 
     def stop(self):
-        self._next_file = ''
+        if self._current_bgm is not None:
+            self._current_bgm.stop()
 
-    def play(self, next_file):
-        self._next_file = next_file
-
-    async def _keep_polling(self, polling_interval, file_prefix):
-        from kivy.core.audio import SoundLoader
-        bgms = self._bgms
-        while True:
-            await trio.sleep(polling_interval)
-            next_file = self._next_file
-            current_bgm = self._current_bgm
-            if next_file is None:
-                continue
-            elif not next_file:
-                self._next_file = None
-                if current_bgm is not None:
-                    await current_bgm.stop()
-                    self._current_bgm = None
-            else:
-                self._next_file = None
-                next_bgm = bgms.get(next_file, None)
-                if next_bgm is None:
-                    next_bgm = Bgm(SoundLoader.load(f"{file_prefix}{next_file}"))
-                    bgms[next_file] = next_bgm
-                if current_bgm is not None and next_bgm is not current_bgm:
-                    await current_bgm.stop()
-                self._current_bgm = next_bgm
-                await next_bgm.play()
+    def play(self, filename:str):
+        cur_bgm = self._current_bgm
+        cur_filename = self._current_filename
+        if cur_filename == filename:
+            cur_bgm.play()
+            return
+        if cur_bgm is not None:
+            cur_bgm.stop()
+        self._current_bgm = bgm = self._get_bgm(filename)
+        self._current_filename = filename
+        bgm.play()
